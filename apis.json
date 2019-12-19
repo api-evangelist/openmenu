@@ -1,0 +1,62 @@
+{
+    "name": "OpenMenu",
+    "description": "<p>OpenMenu has created the first standard to regulate the way restaurants store and share their menus over the Internet by standardizing the menus&rsquo; structure and format. Combined with OpenMenu Registrars, OpenMenu is providing a regulated system for sharing accurate menu information. OpenMenu distributes the information to a network of restaurant based websites, mobile applications, web applications and even your own website. When you update your menu, everyone, everywhere, gets the update. One menu, in one location, driving a restaurant&rsquo;s entire online presence.<\/p>",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/881_logo.jpg",
+    "tags": [
+        "have api",
+        "menus",
+        "restaurants",
+        "target"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/openmenu\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "OpenMenu",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/api-evangelist-site\/company\/881_logo.jpg",
+            "humanURL": "http:\/\/openmenu.org",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/openmenu-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Base",
+            "url": "http:\/\/openmenu.com\/api\/"
+        },
+        {
+            "type": "Blog",
+            "url": "http:\/\/openmenu.com\/blog"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "http:\/\/www.crunchbase.com\/company\/openmenu"
+        },
+        {
+            "type": "Developers",
+            "url": "http:\/\/openmenu.org\/api\/"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/OpenMenu"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/#!\/OpenMenu"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/openmenu.org"
+        }
+    ]
+}
