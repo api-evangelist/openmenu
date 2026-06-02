@@ -1,0 +1,78 @@
+aid: openmenu
+name: OpenMenu
+description: >-
+  OpenMenu provides structured menu data and menu publishing for restaurants,
+  built on the open OpenMenu Format specification. Its public REST API helps
+  developers locate restaurants, menus, and menu items, returning structured
+  data including names, descriptions, prices, locations, and dietary attributes
+  such as vegan, vegetarian, halal, kosher, and gluten-free. The standard API
+  covers search, restaurant, location, deals, and ingredients endpoints, while
+  an Enhanced enterprise tier adds DishDNA machine-learning analysis, trends,
+  heatmaps, and gap analysis. The API offers a sandbox mode, API key
+  authentication, tiered pricing from a free plan up to enterprise, plus Python
+  and Node.js SDKs and code samples.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Restaurant
+  - Menus
+  - Menu Data
+  - Search
+  - Nutrition
+  - Structured Data
+url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/apis.yml
+created: '2026-06-02'
+modified: '2026-06-02'
+specificationVersion: '0.19'
+apis:
+  - aid: openmenu:rest-api
+    name: OpenMenu API
+    description: >-
+      The OpenMenu REST API returns structured restaurant and menu data built on
+      the OpenMenu Format. Standard endpoints include search, restaurant,
+      location, deals, and ingredients, returning menu items with prices,
+      locations, and dietary attributes. An Enhanced enterprise tier adds
+      DishDNA ML-driven analysis, trends, heatmaps, and gap analysis.
+      Authentication uses an API key, with a sandbox mode for sample data.
+    humanURL: https://openmenu.com/api/
+    baseURL: https://www.openmenu.com/api/v2/
+    tags:
+      - Menus
+      - Search
+      - Restaurants
+      - Nutrition
+    properties:
+      - type: Documentation
+        url: https://www.openmenu.com/api/docs/
+      - type: GettingStarted
+        url: https://www.openmenu.com/api/
+  - aid: openmenu:enhanced-api
+    name: OpenMenu Enhanced API
+    description: >-
+      The OpenMenu Enhanced API is an enterprise tier powered by DishDNA machine
+      learning, offering analysis_search, analysis, trends, heatmap, menu and
+      menu_items taxonomy searches, and gap_analysis for competitive menu
+      modeling and regional trend identification across structured menu data.
+    humanURL: https://openmenu.com/api/
+    baseURL: https://www.openmenu.com/api/v2/
+    tags:
+      - Analytics
+      - Trends
+      - Menus
+    properties:
+      - type: Documentation
+        url: https://www.openmenu.com/api/docs/
+common:
+  - type: Website
+    url: https://openmenu.com/
+  - type: Documentation
+    url: https://www.openmenu.com/api/docs/
+  - type: APIReference
+    url: https://openmenu.com/api/
+  - type: SignUp
+    url: https://www.openmenu.com/signup.php?at=developer
+  - type: GitHubOrganization
+    url: https://github.com/openmenu
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
