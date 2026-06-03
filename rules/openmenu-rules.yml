@@ -1,0 +1,71 @@
+extends: [[spectral:oas, recommended]]
+documentationUrl: https://www.openmenu.com/api/docs/
+rules:
+  openmenu-server-base-url:
+    description: Servers must use the OpenMenu API v2 base URL.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://www\\.openmenu\\.com/api/v2$"
+
+  openmenu-apikey-query-auth:
+    description: OpenMenu authenticates via the `key` query parameter, not a header or Bearer token.
+    severity: error
+    given: $.components.securitySchemes[*]
+    then:
+      - field: type
+        function: pattern
+        functionOptions:
+          match: "^apiKey$"
+      - field: in
+        function: pattern
+        functionOptions:
+          match: "^query$"
+      - field: name
+        function: pattern
+        functionOptions:
+          match: "^key$"
+
+  openmenu-summary-title-case:
+    description: Operation summaries should be present and Title Case.
+    severity: warn
+    given: $.paths[*][get].summary
+    then:
+      function: truthy
+
+  openmenu-operationid-required:
+    description: Every operation must declare an operationId.
+    severity: error
+    given: $.paths[*][get]
+    then:
+      field: operationId
+      function: truthy
+
+  openmenu-country-required:
+    description: Location-scoped operations should require an ISO 3166-1 alpha-2 country.
+    severity: warn
+    given: $.paths[*][get].parameters[?(@.name=='country')]
+    then:
+      field: required
+      function: truthy
+
+  openmenu-standard-error-responses:
+    description: Operations should document 400, 402, and 429 error responses.
+    severity: warn
+    given: $.paths[*][get].responses
+    then:
+      - field: "400"
+        function: truthy
+      - field: "429"
+        function: truthy
+
+  openmenu-tags-title-case:
+    description: Tags must be Title Case.
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z]+( [A-Z][A-Za-z]+)*$"

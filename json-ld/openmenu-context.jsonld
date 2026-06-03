@@ -1,0 +1,50 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "om": "https://www.openmenu.com/openmenu-format/#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Restaurant": "schema:Restaurant",
+    "Menu": "schema:Menu",
+    "MenuSection": "schema:MenuSection",
+    "MenuItem": "schema:MenuItem",
+
+    "restaurant_name": "schema:name",
+    "brief_description": "schema:description",
+    "full_description": "schema:disambiguatingDescription",
+    "website_url": { "@id": "schema:url", "@type": "@id" },
+    "phone": "schema:telephone",
+    "address_1": "schema:streetAddress",
+    "city_town": "schema:addressLocality",
+    "state_province": "schema:addressRegion",
+    "postal_code": "schema:postalCode",
+    "country": "schema:addressCountry",
+    "latitude": { "@id": "schema:latitude", "@type": "xsd:decimal" },
+    "longitude": { "@id": "schema:longitude", "@type": "xsd:decimal" },
+    "cuisine_type_primary": "schema:servesCuisine",
+    "cuisine_type_secondary": "schema:servesCuisine",
+
+    "menus": { "@id": "schema:hasMenu", "@type": "@id" },
+    "menu_name": "schema:name",
+    "menu_description": "schema:description",
+    "menu_groups": { "@id": "schema:hasMenuSection", "@type": "@id" },
+    "group_name": "schema:name",
+    "group_description": "schema:description",
+
+    "menu_items": { "@id": "schema:hasMenuItem", "@type": "@id" },
+    "menu_item_name": "schema:name",
+    "menu_item_description": "schema:description",
+    "menu_item_price": "schema:price",
+    "menu_item_calories": "schema:calories",
+    "menu_item_heat_index": "om:heatIndex",
+    "vegetarian": "om:vegetarian",
+    "vegan": "om:vegan",
+    "kosher": "om:kosher",
+    "halal": "om:halal",
+    "gluten_free": "om:glutenFree",
+    "menu_item_allergy_information_allergens": "om:allergens",
+
+    "suitableForDiet": { "@id": "schema:suitableForDiet", "@type": "@id" }
+  }
+}

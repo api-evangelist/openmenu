@@ -1,0 +1,38 @@
+finopsFramework: FOCUS 1.0 alignment
+provider: openmenu
+name: OpenMenu API FinOps Profile
+description: >-
+  Aligns the OpenMenu API billing surface to the FinOps Framework / FOCUS data
+  spec. OpenMenu bills on a prepaid/subscription credit model where one
+  successful request equals one credit.
+source: https://www.openmenu.com/api/docs/rate-limiting.php
+billingModel: subscription-plus-prepaid-credits
+currency: USD
+pricingUnit:
+  name: credit
+  description: One successful API request.
+  exemptions:
+    - Sandbox calls (s=sample / id=sample) are not billed.
+chargeCategories:
+  - chargeCategory: Subscription
+    description: Recurring plan tier (Free, Starter, Growth, Enterprise) granting monthly + daily credit allocations.
+  - chargeCategory: Usage
+    description: Successful API requests metered against the plan's credit allocation.
+  - chargeCategory: Purchase
+    description: On-demand prepaid credit packages.
+    pricingUnit: credit
+    unitPrice: 0.02
+    packageSize: 2000
+    packagePrice: 40.00
+costDrivers:
+  - Number of successful API requests per day and per month.
+  - Plan tier ceiling (daily/monthly credit allocation).
+  - Enterprise access flag for DishDNA Enhanced endpoints.
+optimizationLevers:
+  - Use sandbox sample calls during development to avoid credit consumption.
+  - Cache restaurant and menu profiles since OpenMenu data changes infrequently.
+  - Right-size the plan tier to observed daily/monthly request volume.
+  - Respect the max offset of 10 to avoid wasted paginated calls.
+notes:
+  - HTTP 429 signals credit exhaustion and includes an upgrade_url.
+  - HTTP 402 signals lapsed payment on the API subscription.

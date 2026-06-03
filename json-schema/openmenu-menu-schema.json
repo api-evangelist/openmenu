@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-menu-schema.json",
+  "title": "OpenMenu Menu",
+  "description": "A single menu within a restaurant, including its serving duration and menu groups, per the OpenMenu Format.",
+  "type": "object",
+  "properties": {
+    "menu_name": { "type": "string" },
+    "menu_description": { "type": "string" },
+    "menu_note": { "type": "string" },
+    "currency_symbol": { "type": "string" },
+    "language": { "type": "string" },
+    "menu_duration_name": {
+      "type": "string",
+      "enum": ["breakfast", "brunch", "lunch", "breakfast-lunch", "dinner", "lunch-dinner", "late-night", "all"]
+    },
+    "menu_duration_time_start": {
+      "type": "string",
+      "pattern": "^[0-2][0-9]:[0-5][0-9]$",
+      "description": "Start time in hh:mm (ISO 8601, 24-hour)."
+    },
+    "menu_duration_time_end": {
+      "type": "string",
+      "pattern": "^[0-2][0-9]:[0-5][0-9]$",
+      "description": "End time in hh:mm (ISO 8601, 24-hour)."
+    },
+    "menu_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "group_name": { "type": "string" },
+          "group_note": { "type": "string" },
+          "group_description": { "type": "string" },
+          "menu_items": {
+            "type": "array",
+            "items": { "$ref": "openmenu-menu-item-schema.json" }
+          }
+        },
+        "required": ["group_name"]
+      }
+    }
+  },
+  "required": ["menu_name"]
+}

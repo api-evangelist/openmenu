@@ -1,0 +1,67 @@
+{
+  "api": {
+    "status": 200,
+    "api_version": "2.2",
+    "format": "json",
+    "api_key": false
+  },
+  "result": {
+    "restaurant_info": {
+      "restaurant_name": "Sample Trattoria",
+      "brief_description": "Family-owned Italian kitchen.",
+      "full_description": "A neighborhood trattoria serving regional Italian classics and wood-fired pizza.",
+      "location_id": "loc_001",
+      "address_1": "123 Main Street",
+      "city_town": "Austin",
+      "state_province": "TX",
+      "postal_code": "78701",
+      "country": "US",
+      "phone": "+1-512-555-0100",
+      "longitude": -97.7431,
+      "latitude": 30.2672,
+      "business_type": "restaurant",
+      "utc_offset": "-06:00",
+      "website_url": "https://example-trattoria.com"
+    },
+    "environment_info": {
+      "cuisine_type_primary": "Italian",
+      "takeout_available": true,
+      "delivery_available": true,
+      "wheelchair_accessible": true,
+      "reservations": "recommended",
+      "alcohol_type": "beer-wine"
+    },
+    "operating_days": [
+      { "day_of_week": 1, "day": "Monday", "day_short": "Mon", "open_time": "11:00", "close_time": "22:00" }
+    ],
+    "accepted_currencies": ["USD"],
+    "menus": [
+      {
+        "menu_name": "Dinner",
+        "currency_symbol": "$",
+        "language": "en",
+        "menu_duration_name": "dinner",
+        "menu_duration_time_start": "17:00",
+        "menu_duration_time_end": "22:00",
+        "menu_groups": [
+          {
+            "group_name": "Pasta",
+            "menu_items": [
+              {
+                "menu_item_name": "Spaghetti Carbonara",
+                "menu_item_description": "Guanciale, pecorino, egg yolk, black pepper.",
+                "menu_item_price": "18.00",
+                "menu_item_calories": 820,
+                "vegetarian": false,
+                "gluten_free": false,
+                "menu_item_allergy_information": {
+                  "menu_item_allergy_information_allergens": ["Egg", "Dairy", "Wheat", "Gluten"]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

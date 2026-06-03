@@ -8,9 +8,9 @@ description: >-
   such as vegan, vegetarian, halal, kosher, and gluten-free. The standard API
   covers search, restaurant, location, deals, and ingredients endpoints, while
   an Enhanced enterprise tier adds DishDNA machine-learning analysis, trends,
-  heatmaps, and gap analysis. The API offers a sandbox mode, API key
-  authentication, tiered pricing from a free plan up to enterprise, plus Python
-  and Node.js SDKs and code samples.
+  heatmaps, and gap analysis. The API offers a sandbox mode (s=sample /
+  id=sample), API key authentication via the key query parameter, and tiered
+  pricing from a free plan up to enterprise on a daily/monthly credit model.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -22,7 +22,7 @@ tags:
   - Structured Data
 url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/apis.yml
 created: '2026-06-02'
-modified: '2026-06-02'
+modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
   - aid: openmenu:rest-api
@@ -46,6 +46,28 @@ apis:
         url: https://www.openmenu.com/api/docs/
       - type: GettingStarted
         url: https://www.openmenu.com/api/
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/openapi/openmenu-openapi.yml
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-restaurant-schema.json
+      - type: JSONSchema
+        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-menu-item-schema.json
+      - type: JSONLD
+        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-ld/openmenu-context.jsonld
+      - type: Authentication
+        url: https://www.openmenu.com/api/docs/authentication.php
+      - type: RateLimits
+        url: https://www.openmenu.com/api/docs/rate-limiting.php
+      - type: Plans
+        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/plans/openmenu-plans-pricing.yml
+      - type: RateLimitsArtifact
+        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rate-limits/openmenu-rate-limits.yml
+      - type: FinOps
+        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/finops/openmenu-finops.yml
+      - type: Vocabulary
+        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/vocabulary/openmenu-vocabulary.yml
+      - type: SpectralRules
+        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rules/openmenu-rules.yml
   - aid: openmenu:enhanced-api
     name: OpenMenu Enhanced API
     description: >-
@@ -71,8 +93,12 @@ common:
     url: https://openmenu.com/api/
   - type: SignUp
     url: https://www.openmenu.com/signup.php?at=developer
-  - type: GitHubOrganization
-    url: https://github.com/openmenu
+  - type: Authentication
+    url: https://www.openmenu.com/api/docs/authentication.php
+  - type: RateLimits
+    url: https://www.openmenu.com/api/docs/rate-limiting.php
+  - type: TermsOfService
+    url: https://www.openmenu.com/tos-api.php
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

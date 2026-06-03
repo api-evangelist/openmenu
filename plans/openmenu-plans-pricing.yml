@@ -1,0 +1,57 @@
+apiCommons: Plans 0.1
+provider: openmenu
+name: OpenMenu API Plans And Pricing
+description: >-
+  Commercial offering for the OpenMenu API, built on a monthly + daily credit
+  model where one successful API request consumes one credit. Sandbox calls
+  (s=sample / id=sample) are not metered.
+source: https://www.openmenu.com/api/docs/rate-limiting.php
+currency: USD
+plans:
+  - id: free
+    name: Free
+    description: Automatically provisioned after developer email verification.
+    price: 0
+    limits:
+      daily_credits: 100
+      monthly_credits: 100
+    access:
+      - standard
+  - id: starter
+    name: Starter
+    description: Entry paid tier for higher daily and monthly volume.
+    limits:
+      daily_credits: 500
+      monthly_credits: 5000
+    access:
+      - standard
+  - id: growth
+    name: Growth
+    description: Higher-volume paid tier.
+    limits:
+      daily_credits: 2000
+      monthly_credits: 50000
+    access:
+      - standard
+  - id: enterprise
+    name: Custom / Enterprise
+    description: >-
+      Custom limits with DishDNA Enhanced endpoints (trends, heatmap, analysis,
+      gap_analysis) gated behind the enterprise_access flag. Contact OpenMenu.
+    limits:
+      daily_credits: custom
+      monthly_credits: custom
+    access:
+      - standard
+      - enhanced
+addOns:
+  - id: credit-package
+    name: Credit Package
+    description: Additional purchased credits.
+    unit_size: 2000
+    unit_price: 0.02
+    price_per_package: 40.00
+notes:
+  - One successful API request consumes one credit.
+  - Sandbox calls using s=sample or id=sample are excluded from metering.
+  - Legacy billing keys use a monthly-only credit allocation.

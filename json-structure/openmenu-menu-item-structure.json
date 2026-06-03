@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-structure/openmenu-menu-item-structure.json",
+  "name": "OpenMenuMenuItem",
+  "description": "JSON Structure definition for an OpenMenu Format menu item.",
+  "type": "object",
+  "properties": {
+    "menu_item_name": { "type": "string" },
+    "menu_item_description": { "type": "string" },
+    "menu_item_price": { "type": "string" },
+    "menu_item_calories": { "type": "int32" },
+    "menu_item_heat_index": { "type": "int32" },
+    "special": { "type": "boolean" },
+    "vegetarian": { "type": "boolean" },
+    "vegan": { "type": "boolean" },
+    "kosher": { "type": "boolean" },
+    "halal": { "type": "boolean" },
+    "gluten_free": { "type": "boolean" },
+    "menu_item_allergy_information_allergens": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Egg", "Fish", "Dairy", "Peanut", "Shellfish", "Soy", "Tree Nut", "Wheat", "Gluten"]
+      }
+    }
+  },
+  "required": ["menu_item_name"]
+}

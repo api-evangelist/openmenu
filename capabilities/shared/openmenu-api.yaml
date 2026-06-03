@@ -1,0 +1,54 @@
+apiVersion: naftiko.ai/v1
+kind: Capability
+metadata:
+  name: openmenu-api
+  title: OpenMenu API
+  description: >-
+    Shared capability definitions for the OpenMenu REST API, exposing structured
+    restaurant and menu data built on the OpenMenu Format. Backed by the v2 API
+    at https://www.openmenu.com/api/v2 using API key (query parameter) auth.
+spec:
+  provider: openmenu
+  baseUrl: https://www.openmenu.com/api/v2
+  auth:
+    type: apiKey
+    in: query
+    name: key
+  operations:
+    - id: search
+      summary: Search Restaurants And Menu Items
+      method: GET
+      path: /search.php
+      tags: [Search]
+    - id: getRestaurant
+      summary: Get Restaurant Profile
+      method: GET
+      path: /restaurant.php
+      tags: [Restaurants]
+    - id: listLocations
+      summary: List Restaurants By Location
+      method: GET
+      path: /location.php
+      tags: [Restaurants]
+    - id: getDeals
+      summary: Get Restaurant Deals
+      method: GET
+      path: /deals.php
+      tags: [Deals]
+    - id: searchIngredients
+      summary: Search Ingredient Database
+      method: GET
+      path: /ingredients.php
+      tags: [Ingredients]
+    - id: getTrends
+      summary: Get Menu Trends
+      method: GET
+      path: /trends.php
+      tags: [Analytics]
+      requires: enterprise_access
+    - id: getGapAnalysis
+      summary: Get Menu Gap Analysis
+      method: GET
+      path: /gap_analysis.php
+      tags: [Analytics]
+      requires: enterprise_access

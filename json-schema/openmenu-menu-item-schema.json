@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-menu-item-schema.json",
+  "title": "OpenMenu Menu Item",
+  "description": "A single menu item with price, calories, dietary flags, and allergen information, per the OpenMenu Format.",
+  "type": "object",
+  "properties": {
+    "menu_item_name": { "type": "string" },
+    "menu_item_description": { "type": "string" },
+    "menu_item_price": { "type": "string" },
+    "menu_item_calories": { "type": "integer" },
+    "menu_item_heat_index": { "type": "integer", "description": "Spiciness scale." },
+    "menu_item_allergy_information": {
+      "type": "object",
+      "properties": {
+        "menu_item_allergy_information_allergens": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["Egg", "Fish", "Dairy", "Peanut", "Shellfish", "Soy", "Tree Nut", "Wheat", "Gluten"]
+          }
+        }
+      }
+    },
+    "special": { "type": "boolean" },
+    "vegetarian": { "type": "boolean" },
+    "vegan": { "type": "boolean" },
+    "kosher": { "type": "boolean" },
+    "halal": { "type": "boolean" },
+    "gluten_free": { "type": "boolean" },
+    "menu_item_options": { "type": "array", "items": { "type": "object" } },
+    "menu_item_sizes": { "type": "array", "items": { "type": "object" } },
+    "menu_item_images": { "type": "array", "items": { "type": "string", "format": "uri" } }
+  },
+  "required": ["menu_item_name"]
+}

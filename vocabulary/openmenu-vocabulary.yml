@@ -1,0 +1,60 @@
+vocabulary: OpenMenu
+description: >-
+  Domain vocabulary and taxonomy for the OpenMenu Format and OpenMenu API,
+  mapping the operational and capability dimensions of structured restaurant
+  and menu data.
+version: '2.2'
+source: https://www.openmenu.com/api/docs/
+concepts:
+  - term: OpenMenu Format
+    definition: Open specification for storing and sharing structured restaurant menu information.
+  - term: Restaurant
+    definition: A dining establishment described by contact, location, environment, hours, and menus.
+  - term: Menu
+    definition: A named collection of menu groups served during a defined duration window.
+  - term: Menu Group
+    definition: A named section within a menu (e.g. Appetizers, Pasta) grouping related items.
+  - term: Menu Item
+    definition: An individual dish with name, description, price, calories, dietary flags, and allergens.
+  - term: DishDNA
+    definition: OpenMenu's machine-learning analysis layer powering trends, heatmaps, and gap analysis.
+  - term: Ingredient
+    definition: A food component with nutrition labels, claims, and USDA-style food group.
+dimensions:
+  menu_duration:
+    description: When a menu is served.
+    values: [breakfast, brunch, lunch, breakfast-lunch, dinner, lunch-dinner, late-night, all]
+  dietary_attributes:
+    description: Boolean dietary suitability flags on a menu item.
+    values: [special, vegetarian, vegan, kosher, halal, gluten_free]
+  allergens:
+    description: Allergen warnings declared on a menu item.
+    values: [Egg, Fish, Dairy, Peanut, Shellfish, Soy, Tree Nut, Wheat, Gluten]
+  food_groups:
+    description: USDA-style food group classification used by the ingredients endpoint.
+operations:
+  standard:
+    - search
+    - restaurant
+    - location
+    - deals
+    - ingredients
+  enhanced:
+    - analysis_search
+    - analysis
+    - trends
+    - heatmap
+    - menu
+    - menu_items
+    - gap_analysis
+tags:
+  - Restaurants
+  - Menus
+  - Menu Data
+  - Search
+  - Nutrition
+  - Structured Data
+  - Analytics
+  - Trends
+  - Deals
+  - Ingredients

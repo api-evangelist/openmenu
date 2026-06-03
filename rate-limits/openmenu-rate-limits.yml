@@ -1,0 +1,42 @@
+apiCommons: Rate Limits 0.1
+provider: openmenu
+name: OpenMenu API Rate Limits
+description: >-
+  Request-rate and quota policy for the OpenMenu API, enforced via a daily and
+  monthly credit system per API key.
+source: https://www.openmenu.com/api/docs/rate-limiting.php
+model: credit
+unit: credit
+consumption: One successful API request consumes one credit.
+exemptions:
+  - Sandbox calls using s=sample or id=sample are not metered.
+tiers:
+  - name: Free
+    daily_limit: 100
+    monthly_limit: 100
+  - name: Starter
+    daily_limit: 500
+    monthly_limit: 5000
+  - name: Growth
+    daily_limit: 2000
+    monthly_limit: 50000
+  - name: Legacy
+    daily_limit: null
+    monthly_limit: varies
+    note: Monthly-only credit allocation for older keys.
+  - name: Custom / Enterprise
+    daily_limit: custom
+    monthly_limit: custom
+pagination:
+  max_offset: 10
+  note: Maximum page index is 10 unless the key has paging limits removed.
+enforcement:
+  exceeded_status: 429
+  exceeded_behavior: >-
+    HTTP 429 returned with an upgrade_url in the response when daily or monthly
+    credit limits are exceeded.
+  billing_status: 402
+  billing_behavior: >-
+    HTTP 402 (invalid payment on API) returned before credit evaluation when
+    payment has lapsed.
+  invalid_key_status: 400

@@ -1,0 +1,42 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://www.openmenu.com/api/v2/search.php?s=pizza&city=Austin&state=TX&country=US&key=YOUR_API_KEY"
+  },
+  "response": {
+    "api": {
+      "status": 200,
+      "api_version": "2.2",
+      "format": "json",
+      "api_key": true
+    },
+    "result": {
+      "restaurants": [
+        {
+          "id": "om_98231",
+          "restaurant_name": "Sample Trattoria",
+          "brief_description": "Family-owned Italian kitchen.",
+          "address_1": "123 Main Street",
+          "city_town": "Austin",
+          "state_province": "TX",
+          "postal_code": "78701",
+          "country": "US",
+          "latitude": 30.2672,
+          "longitude": -97.7431,
+          "cuisine_type_primary": "Italian",
+          "website_url": "https://example-trattoria.com",
+          "totals": { "deals": 2 }
+        }
+      ],
+      "items": [
+        {
+          "menu_item_name": "Margherita Pizza",
+          "menu_item_description": "San Marzano tomato, fresh mozzarella, basil.",
+          "menu_item_price": "14.00",
+          "vegetarian": true
+        }
+      ],
+      "menus": []
+    }
+  }
+}

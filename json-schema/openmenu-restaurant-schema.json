@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-restaurant-schema.json",
+  "title": "OpenMenu Restaurant",
+  "description": "A full restaurant profile as expressed in the OpenMenu Format: contact and location, environment, operating hours, and menus.",
+  "type": "object",
+  "properties": {
+    "restaurant_info": {
+      "type": "object",
+      "properties": {
+        "restaurant_name": { "type": "string" },
+        "brief_description": { "type": "string" },
+        "full_description": { "type": "string" },
+        "location_id": { "type": "string" },
+        "mobile": { "type": "string" },
+        "address_1": { "type": "string" },
+        "address_2": { "type": "string" },
+        "city_town": { "type": "string" },
+        "state_province": { "type": "string" },
+        "postal_code": { "type": "string" },
+        "country": { "type": "string", "description": "ISO 3166-1 alpha-2 country code." },
+        "phone": { "type": "string" },
+        "fax": { "type": "string" },
+        "longitude": { "type": "number" },
+        "latitude": { "type": "number" },
+        "business_type": { "type": "string" },
+        "utc_offset": { "type": "string" },
+        "website_url": { "type": "string", "format": "uri" }
+      },
+      "required": ["restaurant_name"]
+    },
+    "environment_info": {
+      "type": "object",
+      "properties": {
+        "cuisine_type_primary": { "type": "string" },
+        "cuisine_type_secondary": { "type": "string" },
+        "smoking_allowed": { "type": "boolean" },
+        "takeout_available": { "type": "boolean" },
+        "seating_qty": { "type": "integer" },
+        "max_group_size": { "type": "integer" },
+        "pets_allowed": { "type": "boolean" },
+        "wheelchair_accessible": { "type": "boolean" },
+        "age_level_preference": { "type": "string" },
+        "dress_code": { "type": "string" },
+        "delivery_available": { "type": "boolean" },
+        "delivery_radius": { "type": "number" },
+        "delivery_fee": { "type": "number" },
+        "catering_available": { "type": "boolean" },
+        "reservations": { "type": "string" },
+        "alcohol_type": { "type": "string" },
+        "music_type": { "type": "string" }
+      }
+    },
+    "operating_days": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "day_of_week": { "type": "integer" },
+          "day": { "type": "string" },
+          "day_short": { "type": "string" },
+          "open_time": { "type": "string" },
+          "close_time": { "type": "string" },
+          "open_time_ampm": { "type": "string" },
+          "close_time_ampm": { "type": "string" }
+        }
+      }
+    },
+    "logo_urls": { "type": "array", "items": { "type": "string", "format": "uri" } },
+    "accepted_currencies": { "type": "array", "items": { "type": "string" } },
+    "parking": { "type": "string" },
+    "menus": {
+      "type": "array",
+      "items": { "$ref": "openmenu-menu-schema.json" }
+    }
+  },
+  "required": ["restaurant_info"]
+}

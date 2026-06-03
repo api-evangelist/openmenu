@@ -1,0 +1,20 @@
+apiVersion: naftiko.ai/v1
+kind: CapabilityWorkflow
+metadata:
+  name: menu-intelligence
+  title: Menu Intelligence
+  description: >-
+    Enterprise DishDNA workflow: identify regional menu trends for an area, then
+    run a gap analysis comparing a specific restaurant's menu against those
+    trends. Requires an API key with enterprise access.
+spec:
+  uses:
+    - shared/openmenu-api
+  requires: enterprise_access
+  steps:
+    - id: regional-trends
+      operation: openmenu-api.getTrends
+      description: Pull trending menu terms for a region.
+    - id: gap-analysis
+      operation: openmenu-api.getGapAnalysis
+      description: Compare a restaurant's menu against the regional trends.
