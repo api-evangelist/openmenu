@@ -1,0 +1,2257 @@
+{
+  "item": [
+    {
+      "id": "5928a921-5bf1-4be1-a020-d7915ebe9b30",
+      "name": "Search",
+      "description": {
+        "content": "Find restaurants, menu items, and sample menus by location and term.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "be3a6b3c-f69c-4e2b-9808-d48b18540d0a",
+          "name": "Search Restaurants And Menu Items",
+          "request": {
+            "name": "Search Restaurants And Menu Items",
+            "description": {
+              "content": "Find restaurants, menu items, and sample menus by location and search term. At least one of `postal_code` or `city` is required, along with `country`. Use `s=sample` for sandbox data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key issued from your OpenMenu account."
+                },
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "(Required) Search term for a restaurant or menu item. Use `sample` for sandbox data."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Page index for paginated results (0-based). Maximum page index is 10."
+                },
+                {
+                  "disabled": false,
+                  "key": "r",
+                  "value": "<integer>",
+                  "description": "Limit results to restaurants only."
+                },
+                {
+                  "disabled": false,
+                  "key": "mi",
+                  "value": "<integer>",
+                  "description": "Limit results to menu items only."
+                },
+                {
+                  "disabled": false,
+                  "key": "postal_code",
+                  "value": "<string>",
+                  "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "Limit results to a city. Required if `postal_code` is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Optional two-letter state or province code to narrow results."
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "(Required) Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e97831a-33dc-4aa7-9543-228a6bdfb896",
+              "name": "Search results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "r",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "mi",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api\": {\n    \"status\": 4928,\n    \"api_version\": \"string\",\n    \"format\": \"string\",\n    \"api_key\": true\n  },\n  \"result\": {\n    \"restaurants\": [\n      {\n        \"id\": \"string\",\n        \"restaurant_name\": \"string\",\n        \"brief_description\": \"string\",\n        \"address_1\": \"string\",\n        \"address_2\": \"string\",\n        \"city_town\": \"string\",\n        \"state_province\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\",\n        \"longitude\": 8488.718795146207,\n        \"latitude\": 2505.3146367296786,\n        \"cuisine_type_primary\": \"string\",\n        \"website_url\": \"string\",\n        \"mobile\": \"string\",\n        \"fDateUpdated\": \"string\",\n        \"social\": {\n          \"facebook\": \"string\",\n          \"twitter\": \"string\"\n        },\n        \"totals\": {\n          \"deals\": 3379\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"restaurant_name\": \"string\",\n        \"brief_description\": \"string\",\n        \"address_1\": \"string\",\n        \"address_2\": \"string\",\n        \"city_town\": \"string\",\n        \"state_province\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\",\n        \"longitude\": 1765.246740665105,\n        \"latitude\": 5310.773868223752,\n        \"cuisine_type_primary\": \"string\",\n        \"website_url\": \"string\",\n        \"mobile\": \"string\",\n        \"fDateUpdated\": \"string\",\n        \"social\": {\n          \"facebook\": \"string\",\n          \"twitter\": \"string\"\n        },\n        \"totals\": {\n          \"deals\": 603\n        }\n      }\n    ],\n    \"items\": [\n      {\n        \"menu_item_name\": \"string\",\n        \"menu_item_description\": \"string\",\n        \"menu_item_price\": \"string\",\n        \"menu_item_calories\": 9506,\n        \"menu_item_heat_index\": 1638,\n        \"menu_item_allergy_information\": {\n          \"menu_item_allergy_information_allergens\": [\n            \"Tree Nut\",\n            \"Peanut\"\n          ]\n        },\n        \"special\": false,\n        \"vegetarian\": false,\n        \"vegan\": true,\n        \"kosher\": false,\n        \"halal\": false,\n        \"gluten_free\": false,\n        \"menu_item_images\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"menu_item_name\": \"string\",\n        \"menu_item_description\": \"string\",\n        \"menu_item_price\": \"string\",\n        \"menu_item_calories\": 1445,\n        \"menu_item_heat_index\": 2558,\n        \"menu_item_allergy_information\": {\n          \"menu_item_allergy_information_allergens\": [\n            \"Shellfish\",\n            \"Fish\"\n          ]\n        },\n        \"special\": false,\n        \"vegetarian\": false,\n        \"vegan\": false,\n        \"kosher\": false,\n        \"halal\": true,\n        \"gluten_free\": true,\n        \"menu_item_images\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"menus\": [\n      {\n        \"menu_name\": \"string\",\n        \"menu_description\": \"string\",\n        \"menu_note\": \"string\",\n        \"currency_symbol\": \"string\",\n        \"language\": \"string\",\n        \"menu_duration_name\": \"brunch\",\n        \"menu_duration_time_start\": \"string\",\n        \"menu_duration_time_end\": \"string\",\n        \"menu_groups\": [\n          {\n            \"group_name\": \"string\",\n            \"group_note\": \"string\",\n            \"group_description\": \"string\",\n            \"menu_items\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"group_name\": \"string\",\n            \"group_note\": \"string\",\n            \"group_description\": \"string\",\n            \"menu_items\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"menu_name\": \"string\",\n        \"menu_description\": \"string\",\n        \"menu_note\": \"string\",\n        \"currency_symbol\": \"string\",\n        \"language\": \"string\",\n        \"menu_duration_name\": \"lunch-dinner\",\n        \"menu_duration_time_start\": \"string\",\n        \"menu_duration_time_end\": \"string\",\n        \"menu_groups\": [\n          {\n            \"group_name\": \"string\",\n            \"group_note\": \"string\",\n            \"group_description\": \"string\",\n            \"menu_items\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"group_name\": \"string\",\n            \"group_note\": \"string\",\n            \"group_description\": \"string\",\n            \"menu_items\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43f4bd3b-c520-463e-b2f1-0bb132e8e6b0",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "r",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "mi",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ae343b5-7ab4-4658-a861-381cf9e2f710",
+              "name": "Key is valid structurally but API billing is inactive or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "r",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "mi",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e63d2157-5718-4b1e-a4a6-4e1c0787a7c5",
+              "name": "Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "r",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "mi",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "161c00c1-1a62-4f07-905c-726b40b581e2",
+      "name": "Restaurants",
+      "description": {
+        "content": "Full restaurant profiles and geographic listings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5e5e4af0-ec1a-41ef-b6bb-0541b3ed1a70",
+          "name": "Get Restaurant Profile",
+          "request": {
+            "name": "Get Restaurant Profile",
+            "description": {
+              "content": "Return the full profile for one restaurant: contact and location, environment, hours, menus, and menu groups. Use `id=sample` for sandbox data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "restaurant.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key issued from your OpenMenu account."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Restaurant ID from a search or location response. Use `sample` for sandbox data."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af5a6b1a-ca8a-43f3-aa9f-9bfe434ca456",
+              "name": "Full restaurant profile.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restaurant.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api\": {\n    \"status\": 6455,\n    \"api_version\": \"string\",\n    \"format\": \"string\",\n    \"api_key\": false\n  },\n  \"result\": {\n    \"restaurant_info\": {\n      \"restaurant_name\": \"string\",\n      \"brief_description\": \"string\",\n      \"full_description\": \"string\",\n      \"location_id\": \"string\",\n      \"mobile\": \"string\",\n      \"address_1\": \"string\",\n      \"address_2\": \"string\",\n      \"city_town\": \"string\",\n      \"state_province\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\",\n      \"phone\": \"string\",\n      \"fax\": \"string\",\n      \"longitude\": 1682.2999508956693,\n      \"latitude\": 382.2570800585257,\n      \"business_type\": \"string\",\n      \"utc_offset\": \"string\",\n      \"website_url\": \"string\"\n    },\n    \"environment_info\": {\n      \"cuisine_type_primary\": \"string\",\n      \"cuisine_type_secondary\": \"string\",\n      \"smoking_allowed\": true,\n      \"takeout_available\": false,\n      \"seating_qty\": 9350,\n      \"max_group_size\": 9800,\n      \"pets_allowed\": false,\n      \"wheelchair_accessible\": true,\n      \"age_level_preference\": \"string\",\n      \"dress_code\": \"string\",\n      \"delivery_available\": false,\n      \"delivery_radius\": 1105.4938230413136,\n      \"delivery_fee\": 1306.935531818335,\n      \"catering_available\": false,\n      \"reservations\": \"string\",\n      \"alcohol_type\": \"string\",\n      \"music_type\": \"string\"\n    },\n    \"operating_days\": [\n      {\n        \"day_of_week\": 8490,\n        \"day\": \"string\",\n        \"day_short\": \"string\",\n        \"open_time\": \"string\",\n        \"close_time\": \"string\",\n        \"open_time_ampm\": \"string\",\n        \"close_time_ampm\": \"string\"\n      },\n      {\n        \"day_of_week\": 3852,\n        \"day\": \"string\",\n        \"day_short\": \"string\",\n        \"open_time\": \"string\",\n        \"close_time\": \"string\",\n        \"open_time_ampm\": \"string\",\n        \"close_time_ampm\": \"string\"\n      }\n    ],\n    \"operating_days_printable\": \"string\",\n    \"logo_urls\": [\n      \"string\",\n      \"string\"\n    ],\n    \"seating_locations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"accepted_currencies\": [\n      \"string\",\n      \"string\"\n    ],\n    \"parking\": \"string\",\n    \"settings\": {},\n    \"menus\": [\n      {\n        \"menu_name\": \"string\",\n        \"menu_description\": \"string\",\n        \"menu_note\": \"string\",\n        \"currency_symbol\": \"string\",\n        \"language\": \"string\",\n        \"menu_duration_name\": \"breakfast-lunch\",\n        \"menu_duration_time_start\": \"string\",\n        \"menu_duration_time_end\": \"string\",\n        \"menu_groups\": [\n          {\n            \"group_name\": \"string\",\n            \"group_note\": \"string\",\n            \"group_description\": \"string\",\n            \"menu_group_options\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"menu_items\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"group_name\": \"string\",\n            \"group_note\": \"string\",\n            \"group_description\": \"string\",\n            \"menu_group_options\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"menu_items\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"menu_name\": \"string\",\n        \"menu_description\": \"string\",\n        \"menu_note\": \"string\",\n        \"currency_symbol\": \"string\",\n        \"language\": \"string\",\n        \"menu_duration_name\": \"brunch\",\n        \"menu_duration_time_start\": \"string\",\n        \"menu_duration_time_end\": \"string\",\n        \"menu_groups\": [\n          {\n            \"group_name\": \"string\",\n            \"group_note\": \"string\",\n            \"group_description\": \"string\",\n            \"menu_group_options\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"menu_items\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"group_name\": \"string\",\n            \"group_note\": \"string\",\n            \"group_description\": \"string\",\n            \"menu_group_options\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"menu_items\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e681aebb-99f0-444e-bcda-6987f123029f",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restaurant.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b489ccc6-c315-4756-b930-3aa7452877b7",
+              "name": "Key is valid structurally but API billing is inactive or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restaurant.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5322f2f-4c55-40ac-ac17-754c12dd827c",
+              "name": "Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "restaurant.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa15b6ac-15cb-4765-9979-a236d9db0d76",
+          "name": "List Restaurants By Location",
+          "request": {
+            "name": "List Restaurants By Location",
+            "description": {
+              "content": "List restaurants in a geographic area. Optionally filter by restaurant name using the `s` parameter. At least one of `postal_code` or `city` is required, along with `country`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "location.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key issued from your OpenMenu account."
+                },
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "Optional restaurant name filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Page index for paginated results (0-based). Maximum page index is 10 unless your key has paging limits removed."
+                },
+                {
+                  "disabled": false,
+                  "key": "postal_code",
+                  "value": "<string>",
+                  "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "Limit results to a city. Required if `postal_code` is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Optional two-letter state or province code to narrow results."
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "(Required) Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7028df1a-ca29-4f62-a433-cb09a7cf4357",
+              "name": "Restaurant listing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api\": {\n    \"status\": 9682,\n    \"api_version\": \"string\",\n    \"format\": \"string\",\n    \"api_key\": false\n  },\n  \"result\": {\n    \"restaurants\": [\n      {\n        \"id\": \"string\",\n        \"restaurant_name\": \"string\",\n        \"brief_description\": \"string\",\n        \"address_1\": \"string\",\n        \"address_2\": \"string\",\n        \"city_town\": \"string\",\n        \"state_province\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\",\n        \"longitude\": 7820.985324635055,\n        \"latitude\": 1344.1154409744815,\n        \"cuisine_type_primary\": \"string\",\n        \"website_url\": \"string\",\n        \"mobile\": \"string\",\n        \"fDateUpdated\": \"string\",\n        \"social\": {\n          \"facebook\": \"string\",\n          \"twitter\": \"string\"\n        },\n        \"totals\": {\n          \"deals\": 22\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"restaurant_name\": \"string\",\n        \"brief_description\": \"string\",\n        \"address_1\": \"string\",\n        \"address_2\": \"string\",\n        \"city_town\": \"string\",\n        \"state_province\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\",\n        \"longitude\": 5211.188907962692,\n        \"latitude\": 6843.695775954679,\n        \"cuisine_type_primary\": \"string\",\n        \"website_url\": \"string\",\n        \"mobile\": \"string\",\n        \"fDateUpdated\": \"string\",\n        \"social\": {\n          \"facebook\": \"string\",\n          \"twitter\": \"string\"\n        },\n        \"totals\": {\n          \"deals\": 5409\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "293de858-0970-4590-bc05-2cf32b110922",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9276dbe-54d4-496e-9cd4-40b618840ef9",
+              "name": "Key is valid structurally but API billing is inactive or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c451f673-4a10-41de-9a07-38922014c9c9",
+              "name": "Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "location.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "033e017d-9625-412f-a95a-a560d4bb9642",
+      "name": "Deals",
+      "description": {
+        "content": "Coupons, specials, and daily deals for a restaurant.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "04ea56c0-64cd-46cf-a869-e2eb98fbe6d2",
+          "name": "Get Restaurant Deals",
+          "request": {
+            "name": "Get Restaurant Deals",
+            "description": {
+              "content": "Return coupons, specials, and daily deals for a single restaurant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "deals.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key issued from your OpenMenu account."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Restaurant ID from a search or location response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b18e823-ea1b-441e-9325-b81a810c58ee",
+              "name": "Deals for the restaurant.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deals.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api\": {\n    \"status\": 6287,\n    \"api_version\": \"string\",\n    \"format\": \"string\",\n    \"api_key\": true\n  },\n  \"result\": {\n    \"deals\": [\n      {\n        \"headline\": \"string\",\n        \"description\": \"string\",\n        \"disclaimer\": \"string\",\n        \"date_start\": \"string\",\n        \"date_end\": \"string\",\n        \"menu_item_name\": \"string\",\n        \"hours_start\": \"string\",\n        \"hours_end\": \"string\",\n        \"day_mon\": 0,\n        \"day_tue\": 1,\n        \"day_wed\": 1,\n        \"day_thu\": 0,\n        \"day_fri\": 1,\n        \"day_sat\": 0,\n        \"day_sun\": 0,\n        \"restaurant_name\": \"string\",\n        \"address_1\": \"string\",\n        \"city_town\": \"string\",\n        \"provider\": \"string\",\n        \"provider_url\": \"string\",\n        \"created_date\": \"string\"\n      },\n      {\n        \"headline\": \"string\",\n        \"description\": \"string\",\n        \"disclaimer\": \"string\",\n        \"date_start\": \"string\",\n        \"date_end\": \"string\",\n        \"menu_item_name\": \"string\",\n        \"hours_start\": \"string\",\n        \"hours_end\": \"string\",\n        \"day_mon\": 0,\n        \"day_tue\": 1,\n        \"day_wed\": 1,\n        \"day_thu\": 1,\n        \"day_fri\": 0,\n        \"day_sat\": 0,\n        \"day_sun\": 0,\n        \"restaurant_name\": \"string\",\n        \"address_1\": \"string\",\n        \"city_town\": \"string\",\n        \"provider\": \"string\",\n        \"provider_url\": \"string\",\n        \"created_date\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e6c5bdb-8a90-4fdf-9303-fc8bb9c6649f",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deals.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e757dd2-0406-4fe6-a629-e18dddd409ff",
+              "name": "Key is valid structurally but API billing is inactive or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deals.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "072fbc1e-0885-4630-af03-35418588a359",
+              "name": "Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deals.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "81c5c9c9-b3f6-4608-944d-c6b184be7b83",
+      "name": "Ingredients",
+      "description": {
+        "content": "Ingredient database with nutrition labels, claims, and food groups.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e874bb0c-c31e-487d-9988-1dedc54e0d25",
+          "name": "Search Ingredient Database",
+          "request": {
+            "name": "Search Ingredient Database",
+            "description": {
+              "content": "Search the ingredient database for nutrition labels, claims, and food-group filtering. Use `s=sample` for sandbox data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingredients.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key issued from your OpenMenu account."
+                },
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "(Required) Ingredient name or partial match. Use `sample` for documentation sandbox."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Page index for paginated results (0-based). Maximum page index is 10 unless your key has paging limits removed."
+                },
+                {
+                  "disabled": false,
+                  "key": "food_group",
+                  "value": "<string>",
+                  "description": "Restrict to a USDA-style food group."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrition",
+                  "value": "<integer>",
+                  "description": "Include full nutrition block in each result."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6aad685-ea7f-4255-831e-5550c6611d38",
+              "name": "Matching ingredients.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingredients.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "food_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api\": {\n    \"status\": 743,\n    \"api_version\": \"string\",\n    \"format\": \"string\",\n    \"api_key\": true\n  },\n  \"result\": {\n    \"ingredients\": [\n      {\n        \"ingredient_id\": \"string\",\n        \"description\": \"string\",\n        \"manufacturer\": \"string\",\n        \"food_group\": \"string\",\n        \"claims\": [\n          \"string\",\n          \"string\"\n        ],\n        \"calories\": 7541.5254904231115,\n        \"nutrition\": {}\n      },\n      {\n        \"ingredient_id\": \"string\",\n        \"description\": \"string\",\n        \"manufacturer\": \"string\",\n        \"food_group\": \"string\",\n        \"claims\": [\n          \"string\",\n          \"string\"\n        ],\n        \"calories\": 8408.527623080974,\n        \"nutrition\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ad2cfde-46a5-4642-93ec-4494eecd0349",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingredients.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "food_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed1a70fc-9fde-48bc-9165-0a4fce8be7c0",
+              "name": "Key is valid structurally but API billing is inactive or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingredients.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "food_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "580b2a90-ed9d-4b58-9a78-0f4e0d025352",
+              "name": "Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingredients.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "food_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0a26f1d2-c8d4-4491-b54d-655567dd1f4c",
+      "name": "Analytics",
+      "description": {
+        "content": "DishDNA machine-learning trends, heatmaps, and gap analysis (Enhanced tier).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f8600c7b-4071-4a86-ad61-609dfbb039a7",
+          "name": "Get Menu Trends",
+          "request": {
+            "name": "Get Menu Trends",
+            "description": {
+              "content": "Return trending menu terms for a geographic area, with frequency and scores. Requires a paid API key with enterprise access enabled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trends.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key issued from your OpenMenu account. Enterprise access required."
+                },
+                {
+                  "disabled": false,
+                  "key": "postal_code",
+                  "value": "<string>",
+                  "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "Limit results to a city. Required if `postal_code` is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Optional two-letter state or province code to narrow results."
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "(Required) Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2efbe244-e391-430e-bbb8-6375f3abeafc",
+              "name": "Trending menu terms for the region.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trends.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api\": {\n    \"status\": 3094,\n    \"api_version\": \"string\",\n    \"format\": \"string\",\n    \"api_key\": false\n  },\n  \"result\": {\n    \"trending\": [\n      {\n        \"term\": \"string\",\n        \"frequency\": 6660,\n        \"score\": 9144.009733750998\n      },\n      {\n        \"term\": \"string\",\n        \"frequency\": 925,\n        \"score\": 3594.7388381250043\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db7e230d-475e-4f48-ac54-ef2643f62806",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trends.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e176975d-ca0d-4f1a-957e-b94ad546c997",
+              "name": "Key is valid structurally but API billing is inactive or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trends.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "139a2595-96e2-4ca6-bc7b-8269b5f77307",
+              "name": "Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trends.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47dfad85-212c-4826-a7c8-c3909fb953e9",
+          "name": "Get Menu Gap Analysis",
+          "request": {
+            "name": "Get Menu Gap Analysis",
+            "description": {
+              "content": "Compare a restaurant's menu against regional trends to identify intersecting staples and gaps. Requires a paid API key with enterprise access enabled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gap_analysis.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) API key issued from your OpenMenu account. Enterprise access required."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Restaurant to analyze."
+                },
+                {
+                  "disabled": false,
+                  "key": "postal_code",
+                  "value": "<string>",
+                  "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "Limit results to a city. Required if `postal_code` is not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Optional two-letter state or province code to narrow results."
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "(Required) Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1e98704-c65e-467d-9576-e34aedaf002f",
+              "name": "Gap analysis result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gap_analysis.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api\": {\n    \"status\": 7792,\n    \"api_version\": \"string\",\n    \"format\": \"string\",\n    \"api_key\": false\n  },\n  \"result\": {\n    \"restaurant_id\": \"string\",\n    \"region\": {\n      \"postal_code\": \"string\",\n      \"country\": \"string\"\n    },\n    \"intersect\": [\n      \"string\",\n      \"string\"\n    ],\n    \"diff\": [\n      \"string\",\n      \"string\"\n    ],\n    \"cuisine\": \"string\",\n    \"summary\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d3769d6-22bb-4dc9-a6ba-ba26e7eaa307",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gap_analysis.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4af404f-41d0-4d29-bdc1-5dab9d5e6657",
+              "name": "Key is valid structurally but API billing is inactive or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gap_analysis.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d58d5a98-95b6-4954-ba19-4889f8973c67",
+              "name": "Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gap_analysis.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1465,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.openmenu.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0dd61380-f13f-41dd-a087-e5432d9c100e",
+    "name": "OpenMenu API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenMenu REST API returns structured restaurant and menu data built on the OpenMenu Format. Standard endpoints cover search, restaurant, location, deals, and ingredients, returning menu items with prices, locations, and dietary attributes. An Enhanced enterprise tier adds DishDNA machine-learning analysis, trends, heatmaps, and gap analysis. Authentication uses an API key passed as the `key` query parameter, and a sandbox mode (`s=sample` or `id=sample`) returns fixed sample JSON without consuming credits.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

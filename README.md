@@ -1,67 +1,91 @@
-# OpenMenu
+# OpenMenu (openmenu)
 
-OpenMenu — **structured menu data and publishing API built on the OpenMenu Format.**
+OpenMenu provides structured menu data and menu publishing for restaurants, built on the open OpenMenu Format specification. Its public REST API helps developers locate restaurants, menus, and menu items, returning structured data including names, descriptions, prices, locations, and dietary attributes such as vegan, vegetarian, halal, kosher, and gluten-free. The standard API covers search, restaurant, location, deals, and ingredients endpoints, while an Enhanced enterprise tier adds DishDNA machine-learning analysis, trends, heatmaps, and gap analysis. The API offers a sandbox mode (s=sample / id=sample), API key authentication via the key query parameter, and tiered pricing from a free plan up to enterprise on a daily/monthly credit model.
 
-OpenMenu provides structured restaurant and menu data through a public REST API (v2.2) built on the open OpenMenu Format specification. Standard endpoints cover search, restaurant profiles, location listings, deals, and ingredients, returning menu items with prices, locations, dietary attributes (vegetarian, vegan, kosher, halal, gluten-free), and allergen information. An Enhanced enterprise tier adds DishDNA machine-learning analysis, trends, heatmaps, and gap analysis.
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/apis.yml)
 
-- **Website:** https://openmenu.com/
-- **API:** https://openmenu.com/api/
-- **Documentation:** https://www.openmenu.com/api/docs/
-- **Base URL:** `https://www.openmenu.com/api/v2/`
-- **Authentication:** API key passed as the `key` query parameter (no Bearer token / custom header)
-- **Sandbox:** `s=sample` or `id=sample` returns fixed sample JSON without consuming credits
+## Scope
+
+- **Type:** Index
+
+## Tags
+
+- Restaurant
+- Menus
+- Menu Data
+- Search
+- Nutrition
+- Structured Data
+
+## Timestamps
+
+- **Created:** 2026-06-02
+- **Modified:** 2026-06-03
 
 ## APIs
 
-| API | Description |
-|---|---|
-| OpenMenu API | Standard endpoints: search, restaurant, location, deals, ingredients. |
-| OpenMenu Enhanced API | DishDNA enterprise tier: analysis, trends, heatmap, gap_analysis (requires `enterprise_access`). |
+### OpenMenu API
 
-## Endpoints
+The OpenMenu REST API returns structured restaurant and menu data built on the OpenMenu Format. Standard endpoints include search, restaurant, location, deals, and ingredients, returning menu items with prices, locations, and dietary attributes. An Enhanced enterprise tier adds DishDNA ML-driven analysis, trends, heatmaps, and gap analysis. Authentication uses an API key, with a sandbox mode for sample data.
 
-| Operation | Method | Path | Tier |
-|---|---|---|---|
-| Search Restaurants And Menu Items | GET | `/search.php` | Standard |
-| Get Restaurant Profile | GET | `/restaurant.php` | Standard |
-| List Restaurants By Location | GET | `/location.php` | Standard |
-| Get Restaurant Deals | GET | `/deals.php` | Standard |
-| Search Ingredient Database | GET | `/ingredients.php` | Standard |
-| Get Menu Trends | GET | `/trends.php` | Enhanced |
-| Get Menu Gap Analysis | GET | `/gap_analysis.php` | Enhanced |
+- **Human URL:** [https://openmenu.com/api/](https://openmenu.com/api/)
+- **Base URL:** `https://www.openmenu.com/api/v2/`
 
-## Artifacts
+#### Tags
 
-| Type | Location |
-|---|---|
-| OpenAPI 3.1 | [`openapi/openmenu-openapi.yml`](openapi/openmenu-openapi.yml) |
-| JSON Schema | [`json-schema/`](json-schema/) — restaurant, menu, menu item |
-| JSON Structure | [`json-structure/`](json-structure/) — menu item |
-| JSON-LD context | [`json-ld/openmenu-context.jsonld`](json-ld/openmenu-context.jsonld) — schema.org Restaurant/Menu/MenuItem mapping |
-| Examples | [`examples/`](examples/) — restaurant profile, search |
-| Spectral rules | [`rules/openmenu-rules.yml`](rules/openmenu-rules.yml) |
-| Naftiko capabilities | [`capabilities/`](capabilities/) — menu discovery, menu intelligence |
-| Vocabulary | [`vocabulary/openmenu-vocabulary.yml`](vocabulary/openmenu-vocabulary.yml) |
-| Plans / pricing | [`plans/openmenu-plans-pricing.yml`](plans/openmenu-plans-pricing.yml) |
-| Rate limits | [`rate-limits/openmenu-rate-limits.yml`](rate-limits/openmenu-rate-limits.yml) |
-| FinOps | [`finops/openmenu-finops.yml`](finops/openmenu-finops.yml) |
+- Menus
+- Search
+- Restaurants
+- Nutrition
 
-## Plans
+#### Properties
 
-| Plan | Daily Credits | Monthly Credits | Access |
-|---|---|---|---|
-| Free | 100 | 100 | Standard |
-| Starter | 500 | 5,000 | Standard |
-| Growth | 2,000 | 50,000 | Standard |
-| Custom / Enterprise | Custom | Custom | Standard + Enhanced |
+- [Documentation](https://www.openmenu.com/api/docs/)
+- [Getting Started](https://www.openmenu.com/api/)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/openapi/openmenu-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-restaurant-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-menu-item-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON-LD](https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-ld/openmenu-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Authentication](https://www.openmenu.com/api/docs/authentication.php)
+- [Rate Limits](https://www.openmenu.com/api/docs/rate-limiting.php)
+- [Plans](https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/plans/openmenu-plans-pricing.yml)
+- [Rate Limits Artifact](https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rate-limits/openmenu-rate-limits.yml)
+- [Fin Ops](https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/finops/openmenu-finops.yml)
+- [Vocabulary](https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/vocabulary/openmenu-vocabulary.yml)
+- [Spectral Rules](https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rules/openmenu-rules.yml)
+- [Postman Collection](collections/openmenu.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openmenu.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-One successful API request consumes one credit. Sandbox calls are not metered. Additional credits sell at $0.02/credit in 2,000-credit packages.
+### OpenMenu Enhanced API
 
-## Notes
+The OpenMenu Enhanced API is an enterprise tier powered by DishDNA machine learning, offering analysis_search, analysis, trends, heatmap, menu and menu_items taxonomy searches, and gap_analysis for competitive menu modeling and regional trend identification across structured menu data.
 
-- There is no first-party OpenMenu GitHub organization; community wrappers exist (e.g. a Ruby parser). No official Python or Node.js SDK or MCP server was found at profiling time.
-- The OpenMenu Format is the open specification underlying all menu data and maps cleanly onto schema.org Restaurant / Menu / MenuSection / MenuItem.
+- **Human URL:** [https://openmenu.com/api/](https://openmenu.com/api/)
+- **Base URL:** `https://www.openmenu.com/api/v2/`
 
----
+#### Tags
 
-Maintained by [Kin Lane](mailto:kin@apievangelist.com) as part of [API Evangelist](https://apievangelist.com).
+- Analytics
+- Trends
+- Menus
+
+#### Properties
+
+- [Documentation](https://www.openmenu.com/api/docs/)
+- [Postman Collection](collections/openmenu.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/openmenu.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+## Common Properties
+
+- [Website](https://openmenu.com/)
+- [Documentation](https://www.openmenu.com/api/docs/)
+- [API Reference](https://openmenu.com/api/)
+- [Sign Up](https://www.openmenu.com/signup.php?at=developer)
+- [Authentication](https://www.openmenu.com/api/docs/authentication.php)
+- [Rate Limits](https://www.openmenu.com/api/docs/rate-limiting.php)
+- [Terms of Service](https://www.openmenu.com/tos-api.php)
+
+## Maintainers
+
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com

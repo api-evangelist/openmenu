@@ -1,0 +1,365 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenMenu API",
+    "version": "2.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Restaurants And Menu Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/search.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Search term for a restaurant or menu item. Use `sample` for sandbox data."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Page index for paginated results (0-based). Maximum page index is 10."
+              },
+              {
+                "name": "r",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to restaurants only."
+              },
+              {
+                "name": "mi",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to menu items only."
+              },
+              {
+                "name": "postal_code",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a city. Required if `postal_code` is not provided."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Optional two-letter state or province code to narrow results."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+              }
+            ]
+          },
+          "docs": "Find restaurants, menu items, and sample menus by location and search term. At least one of `postal_code` or `city` is required, along with `country`. Use `s=sample` for sandbox data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Restaurants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Restaurant Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/restaurant.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Restaurant ID from a search or location response. Use `sample` for sandbox data."
+              }
+            ]
+          },
+          "docs": "Return the full profile for one restaurant: contact and location, environment, hours, menus, and menu groups. Use `id=sample` for sandbox data."
+        },
+        {
+          "info": {
+            "name": "List Restaurants By Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/location.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Optional restaurant name filter."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Page index for paginated results (0-based). Maximum page index is 10 unless your key has paging limits removed."
+              },
+              {
+                "name": "postal_code",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a city. Required if `postal_code` is not provided."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Optional two-letter state or province code to narrow results."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+              }
+            ]
+          },
+          "docs": "List restaurants in a geographic area. Optionally filter by restaurant name using the `s` parameter. At least one of `postal_code` or `city` is required, along with `country`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Deals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Restaurant Deals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/deals.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Restaurant ID from a search or location response."
+              }
+            ]
+          },
+          "docs": "Return coupons, specials, and daily deals for a single restaurant."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ingredients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Ingredient Database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/ingredients.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Ingredient name or partial match. Use `sample` for documentation sandbox."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Page index for paginated results (0-based). Maximum page index is 10 unless your key has paging limits removed."
+              },
+              {
+                "name": "food_group",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to a USDA-style food group."
+              },
+              {
+                "name": "nutrition",
+                "value": "",
+                "type": "query",
+                "description": "Include full nutrition block in each result."
+              }
+            ]
+          },
+          "docs": "Search the ingredient database for nutrition labels, claims, and food-group filtering. Use `s=sample` for sandbox data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Menu Trends",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/trends.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account. Enterprise access required."
+              },
+              {
+                "name": "postal_code",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a city. Required if `postal_code` is not provided."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Optional two-letter state or province code to narrow results."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+              }
+            ]
+          },
+          "docs": "Return trending menu terms for a geographic area, with frequency and scores. Requires a paid API key with enterprise access enabled."
+        },
+        {
+          "info": {
+            "name": "Get Menu Gap Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/gap_analysis.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account. Enterprise access required."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Restaurant to analyze."
+              },
+              {
+                "name": "postal_code",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a city. Required if `postal_code` is not provided."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Optional two-letter state or province code to narrow results."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+              }
+            ]
+          },
+          "docs": "Compare a restaurant's menu against regional trends to identify intersecting staples and gaps. Requires a paid API key with enterprise access enabled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
