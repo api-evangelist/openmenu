@@ -91,7 +91,7 @@ common:
     url: https://www.openmenu.com/api/docs/
   - type: APIReference
     url: https://openmenu.com/api/
-  - type: SignUp
+  - type: Signup
     url: https://www.openmenu.com/signup.php?at=developer
   - type: Authentication
     url: https://www.openmenu.com/api/docs/authentication.php
