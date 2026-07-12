@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/openmenu-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: query
+  parameter: key
+  description: API key issued from your OpenMenu account, passed as the `key` query parameter
+    on every request. There is no Bearer token or custom header.
+  sources:
+  - openapi/openmenu-openapi.yml

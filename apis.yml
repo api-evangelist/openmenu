@@ -85,6 +85,10 @@ apis:
       - type: Documentation
         url: https://www.openmenu.com/api/docs/
 common:
+  - type: DomainSecurity
+    url: security/openmenu-domain-security.yml
+  - type: Authentication
+    url: authentication/openmenu-authentication.yml
   - type: Website
     url: https://openmenu.com/
   - type: Documentation
