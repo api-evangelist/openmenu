@@ -85,6 +85,8 @@ apis:
       - type: Documentation
         url: https://www.openmenu.com/api/docs/
 common:
+  - type: AgenticAccess
+    url: agentic-access/openmenu-agentic-access.yml
   - type: DomainSecurity
     url: security/openmenu-domain-security.yml
   - type: Authentication
