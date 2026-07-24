@@ -1,0 +1,210 @@
+openapi: 3.1.0
+info:
+  title: OpenMenu Analytics API
+  version: 2.2.0
+  description: The OpenMenu REST API returns structured restaurant and menu data built on the OpenMenu Format. Standard endpoints cover search, restaurant, location, deals, and ingredients, returning menu items with prices, locations, and dietary attributes. An Enhanced enterprise tier adds DishDNA machine-learning analysis, trends, heatmaps, and gap analysis. Authentication uses an API key passed as the `key` query parameter, and a sandbox mode (`s=sample` or `id=sample`) returns fixed sample JSON without consuming credits.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  termsOfService: https://www.openmenu.com/tos-api.php
+servers:
+- url: https://www.openmenu.com/api/v2
+  description: OpenMenu API v2 production server
+security:
+- ApiKeyAuth: []
+tags:
+- name: Analytics
+  description: DishDNA machine-learning trends, heatmaps, and gap analysis (Enhanced tier).
+paths:
+  /trends.php:
+    get:
+      operationId: getTrends
+      summary: Get Menu Trends
+      description: Return trending menu terms for a geographic area, with frequency and scores. Requires a paid API key with enterprise access enabled.
+      tags:
+      - Analytics
+      parameters:
+      - name: key
+        in: query
+        required: true
+        description: API key issued from your OpenMenu account. Enterprise access required.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/PostalCode'
+      - $ref: '#/components/parameters/City'
+      - $ref: '#/components/parameters/State'
+      - $ref: '#/components/parameters/Country'
+      responses:
+        '200':
+          description: Trending menu terms for the region.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrendsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidKey'
+        '402':
+          $ref: '#/components/responses/BillingInactive'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /gap_analysis.php:
+    get:
+      operationId: getGapAnalysis
+      summary: Get Menu Gap Analysis
+      description: Compare a restaurant's menu against regional trends to identify intersecting staples and gaps. Requires a paid API key with enterprise access enabled.
+      tags:
+      - Analytics
+      parameters:
+      - name: key
+        in: query
+        required: true
+        description: API key issued from your OpenMenu account. Enterprise access required.
+        schema:
+          type: string
+      - name: id
+        in: query
+        required: true
+        description: Restaurant to analyze.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/PostalCode'
+      - $ref: '#/components/parameters/City'
+      - $ref: '#/components/parameters/State'
+      - $ref: '#/components/parameters/Country'
+      responses:
+        '200':
+          description: Gap analysis result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GapAnalysisResponse'
+        '400':
+          $ref: '#/components/responses/InvalidKey'
+        '402':
+          $ref: '#/components/responses/BillingInactive'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  parameters:
+    Country:
+      name: country
+      in: query
+      required: true
+      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
+      schema:
+        type: string
+    State:
+      name: state
+      in: query
+      required: false
+      description: Optional two-letter state or province code to narrow results.
+      schema:
+        type: string
+    PostalCode:
+      name: postal_code
+      in: query
+      required: false
+      description: Limit results to a postal or ZIP code. Required if `city` is not provided.
+      schema:
+        type: string
+    City:
+      name: city
+      in: query
+      required: false
+      description: Limit results to a city. Required if `postal_code` is not provided.
+      schema:
+        type: string
+  schemas:
+    TrendsResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          type: object
+          properties:
+            trending:
+              type: array
+              items:
+                $ref: '#/components/schemas/TrendTerm'
+    GapAnalysis:
+      type: object
+      properties:
+        restaurant_id:
+          type: string
+        region:
+          type: object
+          properties:
+            postal_code:
+              type: string
+            country:
+              type: string
+        intersect:
+          type: array
+          items:
+            type: string
+        diff:
+          type: array
+          items:
+            type: string
+        cuisine:
+          type: string
+        summary:
+          type: string
+    GapAnalysisResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          $ref: '#/components/schemas/GapAnalysis'
+    TrendTerm:
+      type: object
+      properties:
+        term:
+          type: string
+        frequency:
+          type: integer
+        score:
+          type: number
+    ApiEnvelope:
+      type: object
+      description: Standard `response.api` envelope returned with every call.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code (e.g. 200).
+        api_version:
+          type: string
+          description: API version, e.g. "2.2".
+        format:
+          type: string
+          description: Response format, e.g. "json".
+        api_key:
+          type: boolean
+          description: Whether a valid API key accompanied the request.
+  responses:
+    RateLimited:
+      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    BillingInactive:
+      description: Key is valid structurally but API billing is inactive or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    InvalidKey:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: key
+      description: API key issued from your OpenMenu account, passed as the `key` query parameter on every request. There is no Bearer token or custom header.

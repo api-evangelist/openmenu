@@ -1,0 +1,157 @@
+openapi: 3.1.0
+info:
+  title: OpenMenu Analytics Ingredients API
+  version: 2.2.0
+  description: The OpenMenu REST API returns structured restaurant and menu data built on the OpenMenu Format. Standard endpoints cover search, restaurant, location, deals, and ingredients, returning menu items with prices, locations, and dietary attributes. An Enhanced enterprise tier adds DishDNA machine-learning analysis, trends, heatmaps, and gap analysis. Authentication uses an API key passed as the `key` query parameter, and a sandbox mode (`s=sample` or `id=sample`) returns fixed sample JSON without consuming credits.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  termsOfService: https://www.openmenu.com/tos-api.php
+servers:
+- url: https://www.openmenu.com/api/v2
+  description: OpenMenu API v2 production server
+security:
+- ApiKeyAuth: []
+tags:
+- name: Ingredients
+  description: Ingredient database with nutrition labels, claims, and food groups.
+paths:
+  /ingredients.php:
+    get:
+      operationId: searchIngredients
+      summary: Search Ingredient Database
+      description: Search the ingredient database for nutrition labels, claims, and food-group filtering. Use `s=sample` for sandbox data.
+      tags:
+      - Ingredients
+      parameters:
+      - $ref: '#/components/parameters/Key'
+      - name: s
+        in: query
+        required: true
+        description: Ingredient name or partial match. Use `sample` for documentation sandbox.
+        schema:
+          type: string
+      - name: offset
+        in: query
+        required: false
+        description: Page index for paginated results (0-based). Maximum page index is 10 unless your key has paging limits removed.
+        schema:
+          type: integer
+          minimum: 0
+          maximum: 10
+          default: 0
+      - name: food_group
+        in: query
+        required: false
+        description: Restrict to a USDA-style food group.
+        schema:
+          type: string
+      - name: nutrition
+        in: query
+        required: false
+        description: Include full nutrition block in each result.
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+      responses:
+        '200':
+          description: Matching ingredients.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngredientsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidKey'
+        '402':
+          $ref: '#/components/responses/BillingInactive'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    RateLimited:
+      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    BillingInactive:
+      description: Key is valid structurally but API billing is inactive or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    InvalidKey:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+  schemas:
+    IngredientsResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          type: object
+          properties:
+            ingredients:
+              type: array
+              items:
+                $ref: '#/components/schemas/Ingredient'
+    ApiEnvelope:
+      type: object
+      description: Standard `response.api` envelope returned with every call.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code (e.g. 200).
+        api_version:
+          type: string
+          description: API version, e.g. "2.2".
+        format:
+          type: string
+          description: Response format, e.g. "json".
+        api_key:
+          type: boolean
+          description: Whether a valid API key accompanied the request.
+    Ingredient:
+      type: object
+      properties:
+        ingredient_id:
+          type: string
+        description:
+          type: string
+        manufacturer:
+          type: string
+        food_group:
+          type: string
+        measurements:
+          type: array
+          items:
+            type: object
+        claims:
+          type: array
+          items:
+            type: string
+        calories:
+          type: number
+        nutrition:
+          type: object
+          description: Full nutrition block, included when nutrition=1.
+  parameters:
+    Key:
+      name: key
+      in: query
+      required: false
+      description: API key issued from your OpenMenu account.
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: key
+      description: API key issued from your OpenMenu account, passed as the `key` query parameter on every request. There is no Bearer token or custom header.

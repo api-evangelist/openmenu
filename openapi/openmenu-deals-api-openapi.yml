@@ -1,0 +1,175 @@
+openapi: 3.1.0
+info:
+  title: OpenMenu Analytics Deals API
+  version: 2.2.0
+  description: The OpenMenu REST API returns structured restaurant and menu data built on the OpenMenu Format. Standard endpoints cover search, restaurant, location, deals, and ingredients, returning menu items with prices, locations, and dietary attributes. An Enhanced enterprise tier adds DishDNA machine-learning analysis, trends, heatmaps, and gap analysis. Authentication uses an API key passed as the `key` query parameter, and a sandbox mode (`s=sample` or `id=sample`) returns fixed sample JSON without consuming credits.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  termsOfService: https://www.openmenu.com/tos-api.php
+servers:
+- url: https://www.openmenu.com/api/v2
+  description: OpenMenu API v2 production server
+security:
+- ApiKeyAuth: []
+tags:
+- name: Deals
+  description: Coupons, specials, and daily deals for a restaurant.
+paths:
+  /deals.php:
+    get:
+      operationId: getDeals
+      summary: Get Restaurant Deals
+      description: Return coupons, specials, and daily deals for a single restaurant.
+      tags:
+      - Deals
+      parameters:
+      - $ref: '#/components/parameters/Key'
+      - name: id
+        in: query
+        required: true
+        description: Restaurant ID from a search or location response.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deals for the restaurant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DealsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidKey'
+        '402':
+          $ref: '#/components/responses/BillingInactive'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    RateLimited:
+      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    BillingInactive:
+      description: Key is valid structurally but API billing is inactive or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    InvalidKey:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+  parameters:
+    Key:
+      name: key
+      in: query
+      required: false
+      description: API key issued from your OpenMenu account.
+      schema:
+        type: string
+  schemas:
+    ApiEnvelope:
+      type: object
+      description: Standard `response.api` envelope returned with every call.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code (e.g. 200).
+        api_version:
+          type: string
+          description: API version, e.g. "2.2".
+        format:
+          type: string
+          description: Response format, e.g. "json".
+        api_key:
+          type: boolean
+          description: Whether a valid API key accompanied the request.
+    DealsResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          type: object
+          properties:
+            deals:
+              type: array
+              items:
+                $ref: '#/components/schemas/Deal'
+    Deal:
+      type: object
+      properties:
+        headline:
+          type: string
+        description:
+          type: string
+        disclaimer:
+          type: string
+        date_start:
+          type: string
+        date_end:
+          type: string
+        menu_item_name:
+          type: string
+        hours_start:
+          type: string
+        hours_end:
+          type: string
+        day_mon:
+          type: integer
+          enum:
+          - 0
+          - 1
+        day_tue:
+          type: integer
+          enum:
+          - 0
+          - 1
+        day_wed:
+          type: integer
+          enum:
+          - 0
+          - 1
+        day_thu:
+          type: integer
+          enum:
+          - 0
+          - 1
+        day_fri:
+          type: integer
+          enum:
+          - 0
+          - 1
+        day_sat:
+          type: integer
+          enum:
+          - 0
+          - 1
+        day_sun:
+          type: integer
+          enum:
+          - 0
+          - 1
+        restaurant_name:
+          type: string
+        address_1:
+          type: string
+        city_town:
+          type: string
+        provider:
+          type: string
+        provider_url:
+          type: string
+        created_date:
+          type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: key
+      description: API key issued from your OpenMenu account, passed as the `key` query parameter on every request. There is no Bearer token or custom header.
