@@ -12,7 +12,20 @@ description: >-
   id=sample), API key authentication via the key query parameter, and tiered
   pricing from a free plan up to enterprise on a daily/monthly credit model.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/openmenu.png
 tags:
   - Restaurant
   - Menus
@@ -25,65 +38,231 @@ created: '2026-06-02'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: openmenu:rest-api
-    name: OpenMenu API
-    description: >-
-      The OpenMenu REST API returns structured restaurant and menu data built on
-      the OpenMenu Format. Standard endpoints include search, restaurant,
-      location, deals, and ingredients, returning menu items with prices,
-      locations, and dietary attributes. An Enhanced enterprise tier adds
-      DishDNA ML-driven analysis, trends, heatmaps, and gap analysis.
-      Authentication uses an API key, with a sandbox mode for sample data.
-    humanURL: https://openmenu.com/api/
-    baseURL: https://www.openmenu.com/api/v2/
-    tags:
-      - Menus
-      - Search
-      - Restaurants
-      - Nutrition
-    properties:
-      - type: Documentation
-        url: https://www.openmenu.com/api/docs/
-      - type: GettingStarted
-        url: https://www.openmenu.com/api/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/openapi/openmenu-openapi.yml
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-restaurant-schema.json
-      - type: JSONSchema
-        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-menu-item-schema.json
-      - type: JSONLD
-        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-ld/openmenu-context.jsonld
-      - type: Authentication
-        url: https://www.openmenu.com/api/docs/authentication.php
-      - type: RateLimits
-        url: https://www.openmenu.com/api/docs/rate-limiting.php
-      - type: Plans
-        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/plans/openmenu-plans-pricing.yml
-      - type: RateLimitsArtifact
-        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rate-limits/openmenu-rate-limits.yml
-      - type: FinOps
-        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/finops/openmenu-finops.yml
-      - type: Vocabulary
-        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/vocabulary/openmenu-vocabulary.yml
-      - type: SpectralRules
-        url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rules/openmenu-rules.yml
-  - aid: openmenu:enhanced-api
-    name: OpenMenu Enhanced API
-    description: >-
-      The OpenMenu Enhanced API is an enterprise tier powered by DishDNA machine
-      learning, offering analysis_search, analysis, trends, heatmap, menu and
-      menu_items taxonomy searches, and gap_analysis for competitive menu
-      modeling and regional trend identification across structured menu data.
-    humanURL: https://openmenu.com/api/
-    baseURL: https://www.openmenu.com/api/v2/
-    tags:
-      - Analytics
-      - Trends
-      - Menus
-    properties:
-      - type: Documentation
-        url: https://www.openmenu.com/api/docs/
+- aid: openmenu:enhanced-api
+  name: OpenMenu Enhanced API
+  description: >-
+    The OpenMenu Enhanced API is an enterprise tier powered by DishDNA machine learning, offering analysis_search,
+    analysis, trends, heatmap, menu and menu_items taxonomy searches, and gap_analysis for competitive
+    menu modeling and regional trend identification across structured menu data.
+  humanURL: https://openmenu.com/api/
+  baseURL: https://www.openmenu.com/api/v2/
+  tags:
+  - Analytics
+  - Trends
+  - Menus
+  properties:
+  - type: Documentation
+    url: https://www.openmenu.com/api/docs/
+- aid: openmenu:openmenu-analytics-api
+  name: OpenMenu Analytics API
+  description: DishDNA machine-learning trends, heatmaps, and gap analysis (Enhanced tier).
+  humanURL: https://openmenu.com/api/
+  baseURL: https://www.openmenu.com/api/v2/
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/openmenu-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://www.openmenu.com/api/docs/
+  - type: GettingStarted
+    url: https://www.openmenu.com/api/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-restaurant-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-menu-item-schema.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-ld/openmenu-context.jsonld
+  - type: Authentication
+    url: https://www.openmenu.com/api/docs/authentication.php
+  - type: RateLimits
+    url: https://www.openmenu.com/api/docs/rate-limiting.php
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/plans/openmenu-plans-pricing.yml
+  - type: RateLimitsArtifact
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rate-limits/openmenu-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/finops/openmenu-finops.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/vocabulary/openmenu-vocabulary.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rules/openmenu-rules.yml
+- aid: openmenu:openmenu-deals-api
+  name: OpenMenu Deals API
+  description: Coupons, specials, and daily deals for a restaurant.
+  humanURL: https://openmenu.com/api/
+  baseURL: https://www.openmenu.com/api/v2/
+  tags:
+  - Deals
+  properties:
+  - type: OpenAPI
+    url: openapi/openmenu-deals-api-openapi.yml
+  - type: Documentation
+    url: https://www.openmenu.com/api/docs/
+  - type: GettingStarted
+    url: https://www.openmenu.com/api/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-restaurant-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-menu-item-schema.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-ld/openmenu-context.jsonld
+  - type: Authentication
+    url: https://www.openmenu.com/api/docs/authentication.php
+  - type: RateLimits
+    url: https://www.openmenu.com/api/docs/rate-limiting.php
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/plans/openmenu-plans-pricing.yml
+  - type: RateLimitsArtifact
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rate-limits/openmenu-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/finops/openmenu-finops.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/vocabulary/openmenu-vocabulary.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rules/openmenu-rules.yml
+- aid: openmenu:openmenu-ingredients-api
+  name: OpenMenu Ingredients API
+  description: Ingredient database with nutrition labels, claims, and food groups.
+  humanURL: https://openmenu.com/api/
+  baseURL: https://www.openmenu.com/api/v2/
+  tags:
+  - Ingredients
+  properties:
+  - type: OpenAPI
+    url: openapi/openmenu-ingredients-api-openapi.yml
+  - type: Documentation
+    url: https://www.openmenu.com/api/docs/
+  - type: GettingStarted
+    url: https://www.openmenu.com/api/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-restaurant-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-menu-item-schema.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-ld/openmenu-context.jsonld
+  - type: Authentication
+    url: https://www.openmenu.com/api/docs/authentication.php
+  - type: RateLimits
+    url: https://www.openmenu.com/api/docs/rate-limiting.php
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/plans/openmenu-plans-pricing.yml
+  - type: RateLimitsArtifact
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rate-limits/openmenu-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/finops/openmenu-finops.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/vocabulary/openmenu-vocabulary.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rules/openmenu-rules.yml
+- aid: openmenu:openmenu-restaurants-api
+  name: OpenMenu Restaurants API
+  description: Full restaurant profiles and geographic listings.
+  humanURL: https://openmenu.com/api/
+  baseURL: https://www.openmenu.com/api/v2/
+  tags:
+  - Restaurants
+  properties:
+  - type: OpenAPI
+    url: openapi/openmenu-restaurants-api-openapi.yml
+  - type: Documentation
+    url: https://www.openmenu.com/api/docs/
+  - type: GettingStarted
+    url: https://www.openmenu.com/api/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-restaurant-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-menu-item-schema.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-ld/openmenu-context.jsonld
+  - type: Authentication
+    url: https://www.openmenu.com/api/docs/authentication.php
+  - type: RateLimits
+    url: https://www.openmenu.com/api/docs/rate-limiting.php
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/plans/openmenu-plans-pricing.yml
+  - type: RateLimitsArtifact
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rate-limits/openmenu-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/finops/openmenu-finops.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/vocabulary/openmenu-vocabulary.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rules/openmenu-rules.yml
+- aid: openmenu:openmenu-search-api
+  name: OpenMenu Search API
+  description: Find restaurants, menu items, and sample menus by location and term.
+  humanURL: https://openmenu.com/api/
+  baseURL: https://www.openmenu.com/api/v2/
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/openmenu-search-api-openapi.yml
+  - type: Documentation
+    url: https://www.openmenu.com/api/docs/
+  - type: GettingStarted
+    url: https://www.openmenu.com/api/
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-restaurant-schema.json
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-schema/openmenu-menu-item-schema.json
+  - type: JSONLD
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/json-ld/openmenu-context.jsonld
+  - type: Authentication
+    url: https://www.openmenu.com/api/docs/authentication.php
+  - type: RateLimits
+    url: https://www.openmenu.com/api/docs/rate-limiting.php
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/plans/openmenu-plans-pricing.yml
+  - type: RateLimitsArtifact
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rate-limits/openmenu-rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/finops/openmenu-finops.yml
+  - type: Vocabulary
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/vocabulary/openmenu-vocabulary.yml
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rules/openmenu-rules.yml
 common:
   - type: AgenticAccess
     url: agentic-access/openmenu-agentic-access.yml
