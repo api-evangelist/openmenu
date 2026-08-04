@@ -1,0 +1,872 @@
+openapi: 3.1.0
+info:
+  title: OpenMenu API
+  version: 2.2.0
+  description: >-
+    The OpenMenu REST API returns structured restaurant and menu data built on
+    the OpenMenu Format. Standard endpoints cover search, restaurant, location,
+    deals, and ingredients, returning menu items with prices, locations, and
+    dietary attributes. An Enhanced enterprise tier adds DishDNA machine-learning
+    analysis, trends, heatmaps, and gap analysis. Authentication uses an API key
+    passed as the `key` query parameter, and a sandbox mode (`s=sample` or
+    `id=sample`) returns fixed sample JSON without consuming credits.
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+  termsOfService: https://www.openmenu.com/tos-api.php
+servers:
+  - url: https://www.openmenu.com/api/v2
+    description: OpenMenu API v2 production server
+tags:
+  - name: Search
+    description: Find restaurants, menu items, and sample menus by location and term.
+  - name: Restaurants
+    description: Full restaurant profiles and geographic listings.
+  - name: Deals
+    description: Coupons, specials, and daily deals for a restaurant.
+  - name: Ingredients
+    description: Ingredient database with nutrition labels, claims, and food groups.
+  - name: Analytics
+    description: DishDNA machine-learning trends, heatmaps, and gap analysis (Enhanced tier).
+security:
+  - ApiKeyAuth: []
+paths:
+  /search.php:
+    get:
+      operationId: search
+      summary: Search Restaurants And Menu Items
+      description: >-
+        Find restaurants, menu items, and sample menus by location and search
+        term. At least one of `postal_code` or `city` is required, along with
+        `country`. Use `s=sample` for sandbox data.
+      tags:
+        - Search
+      parameters:
+        - $ref: '#/components/parameters/Key'
+        - name: s
+          in: query
+          required: true
+          description: Search term for a restaurant or menu item. Use `sample` for sandbox data.
+          schema:
+            type: string
+        - name: offset
+          in: query
+          required: false
+          description: Page index for paginated results (0-based). Maximum page index is 10.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 10
+            default: 0
+        - name: r
+          in: query
+          required: false
+          description: Limit results to restaurants only.
+          schema:
+            type: integer
+            enum: [0, 1]
+        - name: mi
+          in: query
+          required: false
+          description: Limit results to menu items only.
+          schema:
+            type: integer
+            enum: [0, 1]
+        - $ref: '#/components/parameters/PostalCode'
+        - $ref: '#/components/parameters/City'
+        - $ref: '#/components/parameters/State'
+        - $ref: '#/components/parameters/Country'
+      responses:
+        '200':
+          description: Search results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          $ref: '#/components/responses/InvalidKey'
+        '402':
+          $ref: '#/components/responses/BillingInactive'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /restaurant.php:
+    get:
+      operationId: getRestaurant
+      summary: Get Restaurant Profile
+      description: >-
+        Return the full profile for one restaurant: contact and location,
+        environment, hours, menus, and menu groups. Use `id=sample` for sandbox
+        data.
+      tags:
+        - Restaurants
+      parameters:
+        - $ref: '#/components/parameters/Key'
+        - name: id
+          in: query
+          required: true
+          description: Restaurant ID from a search or location response. Use `sample` for sandbox data.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Full restaurant profile.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestaurantResponse'
+        '400':
+          $ref: '#/components/responses/InvalidKey'
+        '402':
+          $ref: '#/components/responses/BillingInactive'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /location.php:
+    get:
+      operationId: listLocations
+      summary: List Restaurants By Location
+      description: >-
+        List restaurants in a geographic area. Optionally filter by restaurant
+        name using the `s` parameter. At least one of `postal_code` or `city` is
+        required, along with `country`.
+      tags:
+        - Restaurants
+      parameters:
+        - $ref: '#/components/parameters/Key'
+        - name: s
+          in: query
+          required: false
+          description: Optional restaurant name filter.
+          schema:
+            type: string
+        - name: offset
+          in: query
+          required: false
+          description: Page index for paginated results (0-based). Maximum page index is 10 unless your key has paging limits removed.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 10
+            default: 0
+        - $ref: '#/components/parameters/PostalCode'
+        - $ref: '#/components/parameters/City'
+        - $ref: '#/components/parameters/State'
+        - $ref: '#/components/parameters/Country'
+      responses:
+        '200':
+          description: Restaurant listing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationResponse'
+        '400':
+          $ref: '#/components/responses/InvalidKey'
+        '402':
+          $ref: '#/components/responses/BillingInactive'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /deals.php:
+    get:
+      operationId: getDeals
+      summary: Get Restaurant Deals
+      description: Return coupons, specials, and daily deals for a single restaurant.
+      tags:
+        - Deals
+      parameters:
+        - $ref: '#/components/parameters/Key'
+        - name: id
+          in: query
+          required: true
+          description: Restaurant ID from a search or location response.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deals for the restaurant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DealsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidKey'
+        '402':
+          $ref: '#/components/responses/BillingInactive'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /ingredients.php:
+    get:
+      operationId: searchIngredients
+      summary: Search Ingredient Database
+      description: >-
+        Search the ingredient database for nutrition labels, claims, and
+        food-group filtering. Use `s=sample` for sandbox data.
+      tags:
+        - Ingredients
+      parameters:
+        - $ref: '#/components/parameters/Key'
+        - name: s
+          in: query
+          required: true
+          description: Ingredient name or partial match. Use `sample` for documentation sandbox.
+          schema:
+            type: string
+        - name: offset
+          in: query
+          required: false
+          description: Page index for paginated results (0-based). Maximum page index is 10 unless your key has paging limits removed.
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 10
+            default: 0
+        - name: food_group
+          in: query
+          required: false
+          description: Restrict to a USDA-style food group.
+          schema:
+            type: string
+        - name: nutrition
+          in: query
+          required: false
+          description: Include full nutrition block in each result.
+          schema:
+            type: integer
+            enum: [0, 1]
+      responses:
+        '200':
+          description: Matching ingredients.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngredientsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidKey'
+        '402':
+          $ref: '#/components/responses/BillingInactive'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /trends.php:
+    get:
+      operationId: getTrends
+      summary: Get Menu Trends
+      description: >-
+        Return trending menu terms for a geographic area, with frequency and
+        scores. Requires a paid API key with enterprise access enabled.
+      tags:
+        - Analytics
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: API key issued from your OpenMenu account. Enterprise access required.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PostalCode'
+        - $ref: '#/components/parameters/City'
+        - $ref: '#/components/parameters/State'
+        - $ref: '#/components/parameters/Country'
+      responses:
+        '200':
+          description: Trending menu terms for the region.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrendsResponse'
+        '400':
+          $ref: '#/components/responses/InvalidKey'
+        '402':
+          $ref: '#/components/responses/BillingInactive'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /gap_analysis.php:
+    get:
+      operationId: getGapAnalysis
+      summary: Get Menu Gap Analysis
+      description: >-
+        Compare a restaurant's menu against regional trends to identify
+        intersecting staples and gaps. Requires a paid API key with enterprise
+        access enabled.
+      tags:
+        - Analytics
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: API key issued from your OpenMenu account. Enterprise access required.
+          schema:
+            type: string
+        - name: id
+          in: query
+          required: true
+          description: Restaurant to analyze.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PostalCode'
+        - $ref: '#/components/parameters/City'
+        - $ref: '#/components/parameters/State'
+        - $ref: '#/components/parameters/Country'
+      responses:
+        '200':
+          description: Gap analysis result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GapAnalysisResponse'
+        '400':
+          $ref: '#/components/responses/InvalidKey'
+        '402':
+          $ref: '#/components/responses/BillingInactive'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: key
+      description: >-
+        API key issued from your OpenMenu account, passed as the `key` query
+        parameter on every request. There is no Bearer token or custom header.
+  parameters:
+    Key:
+      name: key
+      in: query
+      required: false
+      description: API key issued from your OpenMenu account.
+      schema:
+        type: string
+    PostalCode:
+      name: postal_code
+      in: query
+      required: false
+      description: Limit results to a postal or ZIP code. Required if `city` is not provided.
+      schema:
+        type: string
+    City:
+      name: city
+      in: query
+      required: false
+      description: Limit results to a city. Required if `postal_code` is not provided.
+      schema:
+        type: string
+    State:
+      name: state
+      in: query
+      required: false
+      description: Optional two-letter state or province code to narrow results.
+      schema:
+        type: string
+    Country:
+      name: country
+      in: query
+      required: true
+      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
+      schema:
+        type: string
+  responses:
+    InvalidKey:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    BillingInactive:
+      description: Key is valid structurally but API billing is inactive or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    RateLimited:
+      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+  schemas:
+    ApiEnvelope:
+      type: object
+      description: Standard `response.api` envelope returned with every call.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code (e.g. 200).
+        api_version:
+          type: string
+          description: API version, e.g. "2.2".
+        format:
+          type: string
+          description: Response format, e.g. "json".
+        api_key:
+          type: boolean
+          description: Whether a valid API key accompanied the request.
+    SearchResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          type: object
+          properties:
+            restaurants:
+              type: array
+              items:
+                $ref: '#/components/schemas/RestaurantSummary'
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/MenuItem'
+            menus:
+              type: array
+              items:
+                $ref: '#/components/schemas/Menu'
+    RestaurantResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          $ref: '#/components/schemas/Restaurant'
+    LocationResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          type: object
+          properties:
+            restaurants:
+              type: array
+              items:
+                $ref: '#/components/schemas/RestaurantSummary'
+    DealsResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          type: object
+          properties:
+            deals:
+              type: array
+              items:
+                $ref: '#/components/schemas/Deal'
+    IngredientsResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          type: object
+          properties:
+            ingredients:
+              type: array
+              items:
+                $ref: '#/components/schemas/Ingredient'
+    TrendsResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          type: object
+          properties:
+            trending:
+              type: array
+              items:
+                $ref: '#/components/schemas/TrendTerm'
+    GapAnalysisResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          $ref: '#/components/schemas/GapAnalysis'
+    RestaurantSummary:
+      type: object
+      description: Compact restaurant record returned in search and location results.
+      properties:
+        id:
+          type: string
+        restaurant_name:
+          type: string
+        brief_description:
+          type: string
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city_town:
+          type: string
+        state_province:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+        longitude:
+          type: number
+        latitude:
+          type: number
+        cuisine_type_primary:
+          type: string
+        website_url:
+          type: string
+        mobile:
+          type: string
+        fDateUpdated:
+          type: string
+        social:
+          type: object
+          properties:
+            facebook:
+              type: string
+            twitter:
+              type: string
+        totals:
+          type: object
+          properties:
+            deals:
+              type: integer
+    Restaurant:
+      type: object
+      description: Full restaurant profile built on the OpenMenu Format.
+      properties:
+        restaurant_info:
+          $ref: '#/components/schemas/RestaurantInfo'
+        environment_info:
+          $ref: '#/components/schemas/EnvironmentInfo'
+        operating_days:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperatingDay'
+        operating_days_printable:
+          type: string
+        logo_urls:
+          type: array
+          items:
+            type: string
+        seating_locations:
+          type: array
+          items:
+            type: string
+        accepted_currencies:
+          type: array
+          items:
+            type: string
+        parking:
+          type: string
+        settings:
+          type: object
+          description: Social media and presentation settings.
+        menus:
+          type: array
+          items:
+            $ref: '#/components/schemas/Menu'
+    RestaurantInfo:
+      type: object
+      properties:
+        restaurant_name:
+          type: string
+        brief_description:
+          type: string
+        full_description:
+          type: string
+        location_id:
+          type: string
+        mobile:
+          type: string
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city_town:
+          type: string
+        state_province:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+        phone:
+          type: string
+        fax:
+          type: string
+        longitude:
+          type: number
+        latitude:
+          type: number
+        business_type:
+          type: string
+        utc_offset:
+          type: string
+        website_url:
+          type: string
+    EnvironmentInfo:
+      type: object
+      properties:
+        cuisine_type_primary:
+          type: string
+        cuisine_type_secondary:
+          type: string
+        smoking_allowed:
+          type: boolean
+        takeout_available:
+          type: boolean
+        seating_qty:
+          type: integer
+        max_group_size:
+          type: integer
+        pets_allowed:
+          type: boolean
+        wheelchair_accessible:
+          type: boolean
+        age_level_preference:
+          type: string
+        dress_code:
+          type: string
+        delivery_available:
+          type: boolean
+        delivery_radius:
+          type: number
+        delivery_fee:
+          type: number
+        catering_available:
+          type: boolean
+        reservations:
+          type: string
+        alcohol_type:
+          type: string
+        music_type:
+          type: string
+    OperatingDay:
+      type: object
+      properties:
+        day_of_week:
+          type: integer
+        day:
+          type: string
+        day_short:
+          type: string
+        open_time:
+          type: string
+        close_time:
+          type: string
+        open_time_ampm:
+          type: string
+        close_time_ampm:
+          type: string
+    Menu:
+      type: object
+      description: A single menu within a restaurant, per the OpenMenu Format.
+      properties:
+        menu_name:
+          type: string
+        menu_description:
+          type: string
+        menu_note:
+          type: string
+        currency_symbol:
+          type: string
+        language:
+          type: string
+        menu_duration_name:
+          type: string
+          enum:
+            - breakfast
+            - brunch
+            - lunch
+            - breakfast-lunch
+            - dinner
+            - lunch-dinner
+            - late-night
+            - all
+        menu_duration_time_start:
+          type: string
+          description: Start time in hh:mm (ISO 8601, 24-hour).
+        menu_duration_time_end:
+          type: string
+          description: End time in hh:mm (ISO 8601, 24-hour).
+        menu_groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuGroup'
+    MenuGroup:
+      type: object
+      properties:
+        group_name:
+          type: string
+        group_note:
+          type: string
+        group_description:
+          type: string
+        menu_group_options:
+          type: array
+          items:
+            type: object
+        menu_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItem'
+    MenuItem:
+      type: object
+      description: A single menu item with prices, dietary flags, and allergens.
+      properties:
+        menu_item_name:
+          type: string
+        menu_item_description:
+          type: string
+        menu_item_price:
+          type: string
+        menu_item_calories:
+          type: integer
+        menu_item_heat_index:
+          type: integer
+        menu_item_allergy_information:
+          type: object
+          properties:
+            menu_item_allergy_information_allergens:
+              type: array
+              items:
+                type: string
+                enum:
+                  - Egg
+                  - Fish
+                  - Dairy
+                  - Peanut
+                  - Shellfish
+                  - Soy
+                  - Tree Nut
+                  - Wheat
+                  - Gluten
+        special:
+          type: boolean
+        vegetarian:
+          type: boolean
+        vegan:
+          type: boolean
+        kosher:
+          type: boolean
+        halal:
+          type: boolean
+        gluten_free:
+          type: boolean
+        menu_item_options:
+          type: array
+          items:
+            type: object
+        menu_item_sizes:
+          type: array
+          items:
+            type: object
+        menu_item_images:
+          type: array
+          items:
+            type: string
+    Deal:
+      type: object
+      properties:
+        headline:
+          type: string
+        description:
+          type: string
+        disclaimer:
+          type: string
+        date_start:
+          type: string
+        date_end:
+          type: string
+        menu_item_name:
+          type: string
+        hours_start:
+          type: string
+        hours_end:
+          type: string
+        day_mon:
+          type: integer
+          enum: [0, 1]
+        day_tue:
+          type: integer
+          enum: [0, 1]
+        day_wed:
+          type: integer
+          enum: [0, 1]
+        day_thu:
+          type: integer
+          enum: [0, 1]
+        day_fri:
+          type: integer
+          enum: [0, 1]
+        day_sat:
+          type: integer
+          enum: [0, 1]
+        day_sun:
+          type: integer
+          enum: [0, 1]
+        restaurant_name:
+          type: string
+        address_1:
+          type: string
+        city_town:
+          type: string
+        provider:
+          type: string
+        provider_url:
+          type: string
+        created_date:
+          type: string
+    Ingredient:
+      type: object
+      properties:
+        ingredient_id:
+          type: string
+        description:
+          type: string
+        manufacturer:
+          type: string
+        food_group:
+          type: string
+        measurements:
+          type: array
+          items:
+            type: object
+        claims:
+          type: array
+          items:
+            type: string
+        calories:
+          type: number
+        nutrition:
+          type: object
+          description: Full nutrition block, included when nutrition=1.
+    TrendTerm:
+      type: object
+      properties:
+        term:
+          type: string
+        frequency:
+          type: integer
+        score:
+          type: number
+    GapAnalysis:
+      type: object
+      properties:
+        restaurant_id:
+          type: string
+        region:
+          type: object
+          properties:
+            postal_code:
+              type: string
+            country:
+              type: string
+        intersect:
+          type: array
+          items:
+            type: string
+        diff:
+          type: array
+          items:
+            type: string
+        cuisine:
+          type: string
+        summary:
+          type: string

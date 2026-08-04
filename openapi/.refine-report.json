@@ -1,0 +1,22 @@
+{
+  "provider": "openmenu",
+  "sources": [
+    "openmenu-analytics-api-openapi.yml",
+    "openmenu-deals-api-openapi.yml",
+    "openmenu-ingredients-api-openapi.yml",
+    "openmenu-restaurants-api-openapi.yml",
+    "openmenu-search-api-openapi.yml"
+  ],
+  "outputs": [
+    "openmenu-analytics-api-openapi.yml",
+    "openmenu-deals-api-openapi.yml",
+    "openmenu-ingredients-api-openapi.yml",
+    "openmenu-restaurants-api-openapi.yml",
+    "openmenu-search-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
