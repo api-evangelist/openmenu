@@ -36,7 +36,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/apis.yml
 created: '2026-06-02'
 modified: '2026-06-03'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: openmenu:enhanced-api
   name: OpenMenu Enhanced API
