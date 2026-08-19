@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenMenu Analytics Deals API",
+    "version": "2.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Restaurant Deals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/deals.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Restaurant ID from a search or location response."
+              }
+            ]
+          },
+          "docs": "Return coupons, specials, and daily deals for a single restaurant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

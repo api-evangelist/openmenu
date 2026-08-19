@@ -1,0 +1,289 @@
+{
+  "item": [
+    {
+      "id": "9f053559-a3bd-42e6-b4f1-a6c001d2a8b7",
+      "name": "Deals",
+      "description": {
+        "content": "Coupons, specials, and daily deals for a restaurant.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7e3c6a72-f664-464a-ab4c-0dfe140644d4",
+          "name": "Get Restaurant Deals",
+          "request": {
+            "name": "Get Restaurant Deals",
+            "description": {
+              "content": "Return coupons, specials, and daily deals for a single restaurant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "deals.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key issued from your OpenMenu account."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Restaurant ID from a search or location response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "972b38e3-2961-4cdd-ab07-79c9d9b1c628",
+              "name": "Deals for the restaurant.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deals.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api\": {\n    \"status\": 2890,\n    \"api_version\": \"string\",\n    \"format\": \"string\",\n    \"api_key\": false\n  },\n  \"result\": {\n    \"deals\": [\n      {\n        \"headline\": \"string\",\n        \"description\": \"string\",\n        \"disclaimer\": \"string\",\n        \"date_start\": \"string\",\n        \"date_end\": \"string\",\n        \"menu_item_name\": \"string\",\n        \"hours_start\": \"string\",\n        \"hours_end\": \"string\",\n        \"day_mon\": 0,\n        \"day_tue\": 0,\n        \"day_wed\": 0,\n        \"day_thu\": 1,\n        \"day_fri\": 1,\n        \"day_sat\": 1,\n        \"day_sun\": 0,\n        \"restaurant_name\": \"string\",\n        \"address_1\": \"string\",\n        \"city_town\": \"string\",\n        \"provider\": \"string\",\n        \"provider_url\": \"string\",\n        \"created_date\": \"string\"\n      },\n      {\n        \"headline\": \"string\",\n        \"description\": \"string\",\n        \"disclaimer\": \"string\",\n        \"date_start\": \"string\",\n        \"date_end\": \"string\",\n        \"menu_item_name\": \"string\",\n        \"hours_start\": \"string\",\n        \"hours_end\": \"string\",\n        \"day_mon\": 0,\n        \"day_tue\": 0,\n        \"day_wed\": 0,\n        \"day_thu\": 0,\n        \"day_fri\": 1,\n        \"day_sat\": 1,\n        \"day_sun\": 1,\n        \"restaurant_name\": \"string\",\n        \"address_1\": \"string\",\n        \"city_town\": \"string\",\n        \"provider\": \"string\",\n        \"provider_url\": \"string\",\n        \"created_date\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe093d02-ec9e-46ed-b2f6-76b5b99479e6",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deals.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5775,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "404271d2-03cc-4936-95f3-35f387de0b3e",
+              "name": "Key is valid structurally but API billing is inactive or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deals.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5775,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3e44f1d-3986-49cc-bdab-c5ea50b35cb1",
+              "name": "Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deals.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 5775,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.openmenu.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "36245f3d-8058-46e5-a100-267c6a820277",
+    "name": "OpenMenu Analytics Deals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenMenu REST API returns structured restaurant and menu data built on the OpenMenu Format. Standard endpoints cover search, restaurant, location, deals, and ingredients, returning menu items with prices, locations, and dietary attributes. An Enhanced enterprise tier adds DishDNA machine-learning analysis, trends, heatmaps, and gap analysis. Authentication uses an API key passed as the `key` query parameter, and a sandbox mode (`s=sample` or `id=sample`) returns fixed sample JSON without consuming credits.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

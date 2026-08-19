@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenMenu Analytics Ingredients API",
+    "version": "2.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ingredients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Ingredient Database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/ingredients.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Ingredient name or partial match. Use `sample` for documentation sandbox."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Page index for paginated results (0-based). Maximum page index is 10 unless your key has paging limits removed."
+              },
+              {
+                "name": "food_group",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to a USDA-style food group."
+              },
+              {
+                "name": "nutrition",
+                "value": "",
+                "type": "query",
+                "description": "Include full nutrition block in each result."
+              }
+            ]
+          },
+          "docs": "Search the ingredient database for nutrition labels, claims, and food-group filtering. Use `s=sample` for sandbox data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

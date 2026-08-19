@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenMenu Analytics Restaurants API",
+    "version": "2.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Restaurants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Restaurant Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/restaurant.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Restaurant ID from a search or location response. Use `sample` for sandbox data."
+              }
+            ]
+          },
+          "docs": "Return the full profile for one restaurant: contact and location, environment, hours, menus, and menu groups. Use `id=sample` for sandbox data."
+        },
+        {
+          "info": {
+            "name": "List Restaurants By Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/location.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Optional restaurant name filter."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Page index for paginated results (0-based). Maximum page index is 10 unless your key has paging limits removed."
+              },
+              {
+                "name": "postal_code",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a city. Required if `postal_code` is not provided."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Optional two-letter state or province code to narrow results."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+              }
+            ]
+          },
+          "docs": "List restaurants in a geographic area. Optionally filter by restaurant name using the `s` parameter. At least one of `postal_code` or `city` is required, along with `country`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

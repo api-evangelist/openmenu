@@ -1,0 +1,355 @@
+{
+  "item": [
+    {
+      "id": "a38ce96a-6888-4d90-8e70-813f65bbab8f",
+      "name": "Ingredients",
+      "description": {
+        "content": "Ingredient database with nutrition labels, claims, and food groups.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f75dc2e6-1bef-4a8c-b96c-b4b7bee5a2ba",
+          "name": "Search Ingredient Database",
+          "request": {
+            "name": "Search Ingredient Database",
+            "description": {
+              "content": "Search the ingredient database for nutrition labels, claims, and food-group filtering. Use `s=sample` for sandbox data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ingredients.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key issued from your OpenMenu account."
+                },
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "(Required) Ingredient name or partial match. Use `sample` for documentation sandbox."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Page index for paginated results (0-based). Maximum page index is 10 unless your key has paging limits removed."
+                },
+                {
+                  "disabled": false,
+                  "key": "food_group",
+                  "value": "<string>",
+                  "description": "Restrict to a USDA-style food group."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrition",
+                  "value": "<integer>",
+                  "description": "Include full nutrition block in each result."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2bfb3c01-dcc2-4080-a827-437c6e8c1db2",
+              "name": "Matching ingredients.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingredients.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "food_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api\": {\n    \"status\": 2443,\n    \"api_version\": \"string\",\n    \"format\": \"string\",\n    \"api_key\": true\n  },\n  \"result\": {\n    \"ingredients\": [\n      {\n        \"ingredient_id\": \"string\",\n        \"description\": \"string\",\n        \"manufacturer\": \"string\",\n        \"food_group\": \"string\",\n        \"claims\": [\n          \"string\",\n          \"string\"\n        ],\n        \"calories\": 6272.466355179792,\n        \"nutrition\": {}\n      },\n      {\n        \"ingredient_id\": \"string\",\n        \"description\": \"string\",\n        \"manufacturer\": \"string\",\n        \"food_group\": \"string\",\n        \"claims\": [\n          \"string\",\n          \"string\"\n        ],\n        \"calories\": 9804.539356475036,\n        \"nutrition\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c13dd3b0-917a-4f9f-8df2-328c4dffe099",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingredients.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "food_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 563,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97835cf6-53a6-4607-af7e-ffabedcc36d3",
+              "name": "Key is valid structurally but API billing is inactive or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingredients.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "food_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 563,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a354be90-3886-4bcf-ad21-faced2ae395e",
+              "name": "Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ingredients.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "food_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 563,\n  \"api_version\": \"string\",\n  \"format\": \"string\",\n  \"api_key\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.openmenu.com/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f87594fc-0e46-4672-9d9c-2ecbbce31ef5",
+    "name": "OpenMenu Analytics Ingredients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The OpenMenu REST API returns structured restaurant and menu data built on the OpenMenu Format. Standard endpoints cover search, restaurant, location, deals, and ingredients, returning menu items with prices, locations, and dietary attributes. An Enhanced enterprise tier adds DishDNA machine-learning analysis, trends, heatmaps, and gap analysis. Authentication uses an API key passed as the `key` query parameter, and a sandbox mode (`s=sample` or `id=sample`) returns fixed sample JSON without consuming credits.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

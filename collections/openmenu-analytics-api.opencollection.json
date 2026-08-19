@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenMenu Analytics API",
+    "version": "2.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Menu Trends",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/trends.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account. Enterprise access required."
+              },
+              {
+                "name": "postal_code",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a city. Required if `postal_code` is not provided."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Optional two-letter state or province code to narrow results."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+              }
+            ]
+          },
+          "docs": "Return trending menu terms for a geographic area, with frequency and scores. Requires a paid API key with enterprise access enabled."
+        },
+        {
+          "info": {
+            "name": "Get Menu Gap Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/gap_analysis.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account. Enterprise access required."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Restaurant to analyze."
+              },
+              {
+                "name": "postal_code",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a city. Required if `postal_code` is not provided."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Optional two-letter state or province code to narrow results."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+              }
+            ]
+          },
+          "docs": "Compare a restaurant's menu against regional trends to identify intersecting staples and gaps. Requires a paid API key with enterprise access enabled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

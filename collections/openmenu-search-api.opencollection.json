@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OpenMenu Analytics Search API",
+    "version": "2.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "key",
+      "value": "{{key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Restaurants And Menu Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.openmenu.com/api/v2/search.php",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key issued from your OpenMenu account."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Search term for a restaurant or menu item. Use `sample` for sandbox data."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Page index for paginated results (0-based). Maximum page index is 10."
+              },
+              {
+                "name": "r",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to restaurants only."
+              },
+              {
+                "name": "mi",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to menu items only."
+              },
+              {
+                "name": "postal_code",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a postal or ZIP code. Required if `city` is not provided."
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a city. Required if `postal_code` is not provided."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Optional two-letter state or province code to narrow results."
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Country for the search area, ISO 3166-1 alpha-2 (e.g. US)."
+              }
+            ]
+          },
+          "docs": "Find restaurants, menu items, and sample menus by location and search term. At least one of `postal_code` or `city` is required, along with `country`. Use `s=sample` for sandbox data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
