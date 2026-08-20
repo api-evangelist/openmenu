@@ -185,6 +185,8 @@ apis:
   humanURL: https://openmenu.com/api/
   baseURL: https://www.openmenu.com/api/v2/
   tags:
+  - Restaurant
+  tags_raw:
   - Restaurants
   properties:
   - type: OpenAPI
