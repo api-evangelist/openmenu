@@ -12,6 +12,18 @@ description: >-
   id=sample), API key authentication via the key query parameter, and tiered
   pricing from a free plan up to enterprise on a daily/monthly credit model.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
