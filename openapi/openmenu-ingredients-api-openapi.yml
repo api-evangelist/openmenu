@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: OpenMenu Analytics Ingredients API
+  title: OpenMenu Ingredients API
   version: 2.2.0
-  description: The OpenMenu REST API returns structured restaurant and menu data built on the OpenMenu Format. Standard endpoints cover search, restaurant, location, deals, and ingredients, returning menu items with prices, locations, and dietary attributes. An Enhanced enterprise tier adds DishDNA machine-learning analysis, trends, heatmaps, and gap analysis. Authentication uses an API key passed as the `key` query parameter, and a sandbox mode (`s=sample` or `id=sample`) returns fixed sample JSON without consuming credits.
+  description: The OpenMenu REST API returns structured restaurant and menu data built on the OpenMenu Format.
   contact:
     name: Kin Lane
     email: kin@apievangelist.com
@@ -76,47 +76,27 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiEnvelope'
-    BillingInactive:
-      description: Key is valid structurally but API billing is inactive or expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
     InvalidKey:
       description: Missing or invalid API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiEnvelope'
+    BillingInactive:
+      description: Key is valid structurally but API billing is inactive or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+  parameters:
+    Key:
+      name: key
+      in: query
+      required: false
+      description: API key issued from your OpenMenu account.
+      schema:
+        type: string
   schemas:
-    IngredientsResponse:
-      type: object
-      properties:
-        api:
-          $ref: '#/components/schemas/ApiEnvelope'
-        result:
-          type: object
-          properties:
-            ingredients:
-              type: array
-              items:
-                $ref: '#/components/schemas/Ingredient'
-    ApiEnvelope:
-      type: object
-      description: Standard `response.api` envelope returned with every call.
-      properties:
-        status:
-          type: integer
-          description: HTTP-style status code (e.g. 200).
-        api_version:
-          type: string
-          description: API version, e.g. "2.2".
-        format:
-          type: string
-          description: Response format, e.g. "json".
-        api_key:
-          type: boolean
-          description: Whether a valid API key accompanied the request.
     Ingredient:
       type: object
       properties:
@@ -141,14 +121,34 @@ components:
         nutrition:
           type: object
           description: Full nutrition block, included when nutrition=1.
-  parameters:
-    Key:
-      name: key
-      in: query
-      required: false
-      description: API key issued from your OpenMenu account.
-      schema:
-        type: string
+    ApiEnvelope:
+      type: object
+      description: Standard `response.api` envelope returned with every call.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code (e.g. 200).
+        api_version:
+          type: string
+          description: API version, e.g. "2.2".
+        format:
+          type: string
+          description: Response format, e.g. "json".
+        api_key:
+          type: boolean
+          description: Whether a valid API key accompanied the request.
+    IngredientsResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          type: object
+          properties:
+            ingredients:
+              type: array
+              items:
+                $ref: '#/components/schemas/Ingredient'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

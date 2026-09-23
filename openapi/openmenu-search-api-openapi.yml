@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: OpenMenu Analytics Search API
+  title: OpenMenu Search API
   version: 2.2.0
-  description: The OpenMenu REST API returns structured restaurant and menu data built on the OpenMenu Format. Standard endpoints cover search, restaurant, location, deals, and ingredients, returning menu items with prices, locations, and dietary attributes. An Enhanced enterprise tier adds DishDNA machine-learning analysis, trends, heatmaps, and gap analysis. Authentication uses an API key passed as the `key` query parameter, and a sandbox mode (`s=sample` or `id=sample`) returns fixed sample JSON without consuming credits.
+  description: The OpenMenu REST API returns structured restaurant and menu data built on the OpenMenu Format.
   contact:
     name: Kin Lane
     email: kin@apievangelist.com
@@ -76,14 +76,26 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    RateLimited:
+      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    InvalidKey:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    BillingInactive:
+      description: Key is valid structurally but API billing is inactive or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
   parameters:
-    Country:
-      name: country
-      in: query
-      required: true
-      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
-      schema:
-        type: string
     Key:
       name: key
       in: query
@@ -96,6 +108,13 @@ components:
       in: query
       required: false
       description: Optional two-letter state or province code to narrow results.
+      schema:
+        type: string
+    Country:
+      name: country
+      in: query
+      required: true
+      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
       schema:
         type: string
     PostalCode:
@@ -113,26 +132,94 @@ components:
       schema:
         type: string
   schemas:
-    SearchResponse:
+    MenuItem:
       type: object
+      description: A single menu item with prices, dietary flags, and allergens.
       properties:
-        api:
-          $ref: '#/components/schemas/ApiEnvelope'
-        result:
+        menu_item_name:
+          type: string
+        menu_item_description:
+          type: string
+        menu_item_price:
+          type: string
+        menu_item_calories:
+          type: integer
+        menu_item_heat_index:
+          type: integer
+        menu_item_allergy_information:
           type: object
           properties:
-            restaurants:
+            menu_item_allergy_information_allergens:
               type: array
               items:
-                $ref: '#/components/schemas/RestaurantSummary'
-            items:
-              type: array
-              items:
-                $ref: '#/components/schemas/MenuItem'
-            menus:
-              type: array
-              items:
-                $ref: '#/components/schemas/Menu'
+                type: string
+                enum:
+                - Egg
+                - Fish
+                - Dairy
+                - Peanut
+                - Shellfish
+                - Soy
+                - Tree Nut
+                - Wheat
+                - Gluten
+        special:
+          type: boolean
+        vegetarian:
+          type: boolean
+        vegan:
+          type: boolean
+        kosher:
+          type: boolean
+        halal:
+          type: boolean
+        gluten_free:
+          type: boolean
+        menu_item_options:
+          type: array
+          items:
+            type: object
+        menu_item_sizes:
+          type: array
+          items:
+            type: object
+        menu_item_images:
+          type: array
+          items:
+            type: string
+    MenuGroup:
+      type: object
+      properties:
+        group_name:
+          type: string
+        group_note:
+          type: string
+        group_description:
+          type: string
+        menu_group_options:
+          type: array
+          items:
+            type: object
+        menu_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItem'
+    ApiEnvelope:
+      type: object
+      description: Standard `response.api` envelope returned with every call.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code (e.g. 200).
+        api_version:
+          type: string
+          description: API version, e.g. "2.2".
+        format:
+          type: string
+          description: Response format, e.g. "json".
+        api_key:
+          type: boolean
+          description: Whether a valid API key accompanied the request.
     Menu:
       type: object
       description: A single menu within a restaurant, per the OpenMenu Format.
@@ -214,113 +301,26 @@ components:
           properties:
             deals:
               type: integer
-    ApiEnvelope:
+    SearchResponse:
       type: object
-      description: Standard `response.api` envelope returned with every call.
       properties:
-        status:
-          type: integer
-          description: HTTP-style status code (e.g. 200).
-        api_version:
-          type: string
-          description: API version, e.g. "2.2".
-        format:
-          type: string
-          description: Response format, e.g. "json".
-        api_key:
-          type: boolean
-          description: Whether a valid API key accompanied the request.
-    MenuItem:
-      type: object
-      description: A single menu item with prices, dietary flags, and allergens.
-      properties:
-        menu_item_name:
-          type: string
-        menu_item_description:
-          type: string
-        menu_item_price:
-          type: string
-        menu_item_calories:
-          type: integer
-        menu_item_heat_index:
-          type: integer
-        menu_item_allergy_information:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
           type: object
           properties:
-            menu_item_allergy_information_allergens:
+            restaurants:
               type: array
               items:
-                type: string
-                enum:
-                - Egg
-                - Fish
-                - Dairy
-                - Peanut
-                - Shellfish
-                - Soy
-                - Tree Nut
-                - Wheat
-                - Gluten
-        special:
-          type: boolean
-        vegetarian:
-          type: boolean
-        vegan:
-          type: boolean
-        kosher:
-          type: boolean
-        halal:
-          type: boolean
-        gluten_free:
-          type: boolean
-        menu_item_options:
-          type: array
-          items:
-            type: object
-        menu_item_sizes:
-          type: array
-          items:
-            type: object
-        menu_item_images:
-          type: array
-          items:
-            type: string
-    MenuGroup:
-      type: object
-      properties:
-        group_name:
-          type: string
-        group_note:
-          type: string
-        group_description:
-          type: string
-        menu_group_options:
-          type: array
-          items:
-            type: object
-        menu_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItem'
-  responses:
-    RateLimited:
-      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
-    BillingInactive:
-      description: Key is valid structurally but API billing is inactive or expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
-    InvalidKey:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
+                $ref: '#/components/schemas/RestaurantSummary'
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/MenuItem'
+            menus:
+              type: array
+              items:
+                $ref: '#/components/schemas/Menu'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
