@@ -86,173 +86,38 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  parameters:
-    Key:
-      name: key
-      in: query
-      required: false
-      description: API key issued from your OpenMenu account.
-      schema:
-        type: string
-    State:
-      name: state
-      in: query
-      required: false
-      description: Optional two-letter state or province code to narrow results.
-      schema:
-        type: string
-    City:
-      name: city
-      in: query
-      required: false
-      description: Limit results to a city. Required if `postal_code` is not provided.
-      schema:
-        type: string
-    Country:
-      name: country
-      in: query
-      required: true
-      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
-      schema:
-        type: string
-    PostalCode:
-      name: postal_code
-      in: query
-      required: false
-      description: Limit results to a postal or ZIP code. Required if `city` is not provided.
-      schema:
-        type: string
+  responses:
+    InvalidKey:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    BillingInactive:
+      description: Key is valid structurally but API billing is inactive or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    RateLimited:
+      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
   schemas:
-    Restaurant:
-      type: object
-      description: Full restaurant profile built on the OpenMenu Format.
-      properties:
-        restaurant_info:
-          $ref: '#/components/schemas/RestaurantInfo'
-        environment_info:
-          $ref: '#/components/schemas/EnvironmentInfo'
-        operating_days:
-          type: array
-          items:
-            $ref: '#/components/schemas/OperatingDay'
-        operating_days_printable:
-          type: string
-        logo_urls:
-          type: array
-          items:
-            type: string
-        seating_locations:
-          type: array
-          items:
-            type: string
-        accepted_currencies:
-          type: array
-          items:
-            type: string
-        parking:
-          type: string
-        settings:
-          type: object
-          description: Social media and presentation settings.
-        menus:
-          type: array
-          items:
-            $ref: '#/components/schemas/Menu'
-    ApiEnvelope:
-      type: object
-      description: Standard `response.api` envelope returned with every call.
-      properties:
-        status:
-          type: integer
-          description: HTTP-style status code (e.g. 200).
-        api_version:
-          type: string
-          description: API version, e.g. "2.2".
-        format:
-          type: string
-          description: Response format, e.g. "json".
-        api_key:
-          type: boolean
-          description: Whether a valid API key accompanied the request.
-    Menu:
-      type: object
-      description: A single menu within a restaurant, per the OpenMenu Format.
-      properties:
-        menu_name:
-          type: string
-        menu_description:
-          type: string
-        menu_note:
-          type: string
-        currency_symbol:
-          type: string
-        language:
-          type: string
-        menu_duration_name:
-          type: string
-          enum:
-          - breakfast
-          - brunch
-          - lunch
-          - breakfast-lunch
-          - dinner
-          - lunch-dinner
-          - late-night
-          - all
-        menu_duration_time_start:
-          type: string
-          description: Start time in hh:mm (ISO 8601, 24-hour).
-        menu_duration_time_end:
-          type: string
-          description: End time in hh:mm (ISO 8601, 24-hour).
-        menu_groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuGroup'
-    EnvironmentInfo:
-      type: object
-      properties:
-        cuisine_type_primary:
-          type: string
-        cuisine_type_secondary:
-          type: string
-        smoking_allowed:
-          type: boolean
-        takeout_available:
-          type: boolean
-        seating_qty:
-          type: integer
-        max_group_size:
-          type: integer
-        pets_allowed:
-          type: boolean
-        wheelchair_accessible:
-          type: boolean
-        age_level_preference:
-          type: string
-        dress_code:
-          type: string
-        delivery_available:
-          type: boolean
-        delivery_radius:
-          type: number
-        delivery_fee:
-          type: number
-        catering_available:
-          type: boolean
-        reservations:
-          type: string
-        alcohol_type:
-          type: string
-        music_type:
-          type: string
-    RestaurantResponse:
+    LocationResponse:
       type: object
       properties:
         api:
           $ref: '#/components/schemas/ApiEnvelope'
         result:
-          $ref: '#/components/schemas/Restaurant'
+          type: object
+          properties:
+            restaurants:
+              type: array
+              items:
+                $ref: '#/components/schemas/RestaurantSummary'
     MenuItem:
       type: object
       description: A single menu item with prices, dietary flags, and allergens.
@@ -308,6 +173,58 @@ components:
           type: array
           items:
             type: string
+    Restaurant:
+      type: object
+      description: Full restaurant profile built on the OpenMenu Format.
+      properties:
+        restaurant_info:
+          $ref: '#/components/schemas/RestaurantInfo'
+        environment_info:
+          $ref: '#/components/schemas/EnvironmentInfo'
+        operating_days:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperatingDay'
+        operating_days_printable:
+          type: string
+        logo_urls:
+          type: array
+          items:
+            type: string
+        seating_locations:
+          type: array
+          items:
+            type: string
+        accepted_currencies:
+          type: array
+          items:
+            type: string
+        parking:
+          type: string
+        settings:
+          type: object
+          description: Social media and presentation settings.
+        menus:
+          type: array
+          items:
+            $ref: '#/components/schemas/Menu'
+    MenuGroup:
+      type: object
+      properties:
+        group_name:
+          type: string
+        group_note:
+          type: string
+        group_description:
+          type: string
+        menu_group_options:
+          type: array
+          items:
+            type: object
+        menu_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItem'
     OperatingDay:
       type: object
       properties:
@@ -325,6 +242,105 @@ components:
           type: string
         close_time_ampm:
           type: string
+    EnvironmentInfo:
+      type: object
+      properties:
+        cuisine_type_primary:
+          type: string
+        cuisine_type_secondary:
+          type: string
+        smoking_allowed:
+          type: boolean
+        takeout_available:
+          type: boolean
+        seating_qty:
+          type: integer
+        max_group_size:
+          type: integer
+        pets_allowed:
+          type: boolean
+        wheelchair_accessible:
+          type: boolean
+        age_level_preference:
+          type: string
+        dress_code:
+          type: string
+        delivery_available:
+          type: boolean
+        delivery_radius:
+          type: number
+        delivery_fee:
+          type: number
+        catering_available:
+          type: boolean
+        reservations:
+          type: string
+        alcohol_type:
+          type: string
+        music_type:
+          type: string
+    ApiEnvelope:
+      type: object
+      description: Standard `response.api` envelope returned with every call.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code (e.g. 200).
+        api_version:
+          type: string
+          description: API version, e.g. "2.2".
+        format:
+          type: string
+          description: Response format, e.g. "json".
+        api_key:
+          type: boolean
+          description: Whether a valid API key accompanied the request.
+    RestaurantInfo:
+      type: object
+      properties:
+        restaurant_name:
+          type: string
+        brief_description:
+          type: string
+        full_description:
+          type: string
+        location_id:
+          type: string
+        mobile:
+          type: string
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city_town:
+          type: string
+        state_province:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+        phone:
+          type: string
+        fax:
+          type: string
+        longitude:
+          type: number
+        latitude:
+          type: number
+        business_type:
+          type: string
+        utc_offset:
+          type: string
+        website_url:
+          type: string
+    RestaurantResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          $ref: '#/components/schemas/Restaurant'
     RestaurantSummary:
       type: object
       description: Compact restaurant record returned in search and location results.
@@ -371,93 +387,77 @@ components:
           properties:
             deals:
               type: integer
-    RestaurantInfo:
+    Menu:
       type: object
+      description: A single menu within a restaurant, per the OpenMenu Format.
       properties:
-        restaurant_name:
+        menu_name:
           type: string
-        brief_description:
+        menu_description:
           type: string
-        full_description:
+        menu_note:
           type: string
-        location_id:
+        currency_symbol:
           type: string
-        mobile:
+        language:
           type: string
-        address_1:
+        menu_duration_name:
           type: string
-        address_2:
+          enum:
+          - breakfast
+          - brunch
+          - lunch
+          - breakfast-lunch
+          - dinner
+          - lunch-dinner
+          - late-night
+          - all
+        menu_duration_time_start:
           type: string
-        city_town:
+          description: Start time in hh:mm (ISO 8601, 24-hour).
+        menu_duration_time_end:
           type: string
-        state_province:
-          type: string
-        postal_code:
-          type: string
-        country:
-          type: string
-        phone:
-          type: string
-        fax:
-          type: string
-        longitude:
-          type: number
-        latitude:
-          type: number
-        business_type:
-          type: string
-        utc_offset:
-          type: string
-        website_url:
-          type: string
-    LocationResponse:
-      type: object
-      properties:
-        api:
-          $ref: '#/components/schemas/ApiEnvelope'
-        result:
-          type: object
-          properties:
-            restaurants:
-              type: array
-              items:
-                $ref: '#/components/schemas/RestaurantSummary'
-    MenuGroup:
-      type: object
-      properties:
-        group_name:
-          type: string
-        group_note:
-          type: string
-        group_description:
-          type: string
-        menu_group_options:
+          description: End time in hh:mm (ISO 8601, 24-hour).
+        menu_groups:
           type: array
           items:
-            type: object
-        menu_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItem'
-  responses:
-    RateLimited:
-      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
-    BillingInactive:
-      description: Key is valid structurally but API billing is inactive or expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
-    InvalidKey:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
+            $ref: '#/components/schemas/MenuGroup'
+  parameters:
+    State:
+      name: state
+      in: query
+      required: false
+      description: Optional two-letter state or province code to narrow results.
+      schema:
+        type: string
+    Key:
+      name: key
+      in: query
+      required: false
+      description: API key issued from your OpenMenu account.
+      schema:
+        type: string
+    PostalCode:
+      name: postal_code
+      in: query
+      required: false
+      description: Limit results to a postal or ZIP code. Required if `city` is not provided.
+      schema:
+        type: string
+    City:
+      name: city
+      in: query
+      required: false
+      description: Limit results to a city. Required if `postal_code` is not provided.
+      schema:
+        type: string
+    Country:
+      name: country
+      in: query
+      required: true
+      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

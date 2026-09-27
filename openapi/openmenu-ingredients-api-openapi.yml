@@ -70,14 +70,14 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   responses:
-    RateLimited:
-      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
+    InvalidKey:
+      description: Missing or invalid API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiEnvelope'
-    InvalidKey:
-      description: Missing or invalid API key.
+    RateLimited:
+      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
       content:
         application/json:
           schema:
@@ -88,15 +88,23 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiEnvelope'
-  parameters:
-    Key:
-      name: key
-      in: query
-      required: false
-      description: API key issued from your OpenMenu account.
-      schema:
-        type: string
   schemas:
+    ApiEnvelope:
+      type: object
+      description: Standard `response.api` envelope returned with every call.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code (e.g. 200).
+        api_version:
+          type: string
+          description: API version, e.g. "2.2".
+        format:
+          type: string
+          description: Response format, e.g. "json".
+        api_key:
+          type: boolean
+          description: Whether a valid API key accompanied the request.
     Ingredient:
       type: object
       properties:
@@ -121,22 +129,6 @@ components:
         nutrition:
           type: object
           description: Full nutrition block, included when nutrition=1.
-    ApiEnvelope:
-      type: object
-      description: Standard `response.api` envelope returned with every call.
-      properties:
-        status:
-          type: integer
-          description: HTTP-style status code (e.g. 200).
-        api_version:
-          type: string
-          description: API version, e.g. "2.2".
-        format:
-          type: string
-          description: Response format, e.g. "json".
-        api_key:
-          type: boolean
-          description: Whether a valid API key accompanied the request.
     IngredientsResponse:
       type: object
       properties:
@@ -149,6 +141,14 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Ingredient'
+  parameters:
+    Key:
+      name: key
+      in: query
+      required: false
+      description: API key issued from your OpenMenu account.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -46,14 +46,14 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   responses:
-    RateLimited:
-      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
+    InvalidKey:
+      description: Missing or invalid API key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiEnvelope'
-    InvalidKey:
-      description: Missing or invalid API key.
+    RateLimited:
+      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
       content:
         application/json:
           schema:
@@ -64,27 +64,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiEnvelope'
-  parameters:
-    Key:
-      name: key
-      in: query
-      required: false
-      description: API key issued from your OpenMenu account.
-      schema:
-        type: string
   schemas:
-    DealsResponse:
-      type: object
-      properties:
-        api:
-          $ref: '#/components/schemas/ApiEnvelope'
-        result:
-          type: object
-          properties:
-            deals:
-              type: array
-              items:
-                $ref: '#/components/schemas/Deal'
     ApiEnvelope:
       type: object
       description: Standard `response.api` envelope returned with every call.
@@ -167,6 +147,26 @@ components:
           type: string
         created_date:
           type: string
+    DealsResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          type: object
+          properties:
+            deals:
+              type: array
+              items:
+                $ref: '#/components/schemas/Deal'
+  parameters:
+    Key:
+      name: key
+      in: query
+      required: false
+      description: API key issued from your OpenMenu account.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

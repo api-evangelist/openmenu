@@ -85,55 +85,14 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    RateLimited:
-      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
-    InvalidKey:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
-    BillingInactive:
-      description: Key is valid structurally but API billing is inactive or expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
-  parameters:
-    State:
-      name: state
-      in: query
-      required: false
-      description: Optional two-letter state or province code to narrow results.
-      schema:
-        type: string
-    Country:
-      name: country
-      in: query
-      required: true
-      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
-      schema:
-        type: string
-    PostalCode:
-      name: postal_code
-      in: query
-      required: false
-      description: Limit results to a postal or ZIP code. Required if `city` is not provided.
-      schema:
-        type: string
-    City:
-      name: city
-      in: query
-      required: false
-      description: Limit results to a city. Required if `postal_code` is not provided.
-      schema:
-        type: string
   schemas:
+    GapAnalysisResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          $ref: '#/components/schemas/GapAnalysis'
     TrendTerm:
       type: object
       properties:
@@ -143,6 +102,18 @@ components:
           type: integer
         score:
           type: number
+    TrendsResponse:
+      type: object
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiEnvelope'
+        result:
+          type: object
+          properties:
+            trending:
+              type: array
+              items:
+                $ref: '#/components/schemas/TrendTerm'
     ApiEnvelope:
       type: object
       description: Standard `response.api` envelope returned with every call.
@@ -183,25 +154,54 @@ components:
           type: string
         summary:
           type: string
-    GapAnalysisResponse:
-      type: object
-      properties:
-        api:
-          $ref: '#/components/schemas/ApiEnvelope'
-        result:
-          $ref: '#/components/schemas/GapAnalysis'
-    TrendsResponse:
-      type: object
-      properties:
-        api:
-          $ref: '#/components/schemas/ApiEnvelope'
-        result:
-          type: object
-          properties:
-            trending:
-              type: array
-              items:
-                $ref: '#/components/schemas/TrendTerm'
+  responses:
+    RateLimited:
+      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    BillingInactive:
+      description: Key is valid structurally but API billing is inactive or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    InvalidKey:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+  parameters:
+    State:
+      name: state
+      in: query
+      required: false
+      description: Optional two-letter state or province code to narrow results.
+      schema:
+        type: string
+    City:
+      name: city
+      in: query
+      required: false
+      description: Limit results to a city. Required if `postal_code` is not provided.
+      schema:
+        type: string
+    Country:
+      name: country
+      in: query
+      required: true
+      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
+      schema:
+        type: string
+    PostalCode:
+      name: postal_code
+      in: query
+      required: false
+      description: Limit results to a postal or ZIP code. Required if `city` is not provided.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
