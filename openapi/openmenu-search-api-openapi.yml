@@ -76,6 +76,42 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  parameters:
+    City:
+      name: city
+      in: query
+      required: false
+      description: Limit results to a city. Required if `postal_code` is not provided.
+      schema:
+        type: string
+    State:
+      name: state
+      in: query
+      required: false
+      description: Optional two-letter state or province code to narrow results.
+      schema:
+        type: string
+    Key:
+      name: key
+      in: query
+      required: false
+      description: API key issued from your OpenMenu account.
+      schema:
+        type: string
+    Country:
+      name: country
+      in: query
+      required: true
+      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
+      schema:
+        type: string
+    PostalCode:
+      name: postal_code
+      in: query
+      required: false
+      description: Limit results to a postal or ZIP code. Required if `city` is not provided.
+      schema:
+        type: string
   schemas:
     RestaurantSummary:
       type: object
@@ -123,41 +159,6 @@ components:
           properties:
             deals:
               type: integer
-    Menu:
-      type: object
-      description: A single menu within a restaurant, per the OpenMenu Format.
-      properties:
-        menu_name:
-          type: string
-        menu_description:
-          type: string
-        menu_note:
-          type: string
-        currency_symbol:
-          type: string
-        language:
-          type: string
-        menu_duration_name:
-          type: string
-          enum:
-          - breakfast
-          - brunch
-          - lunch
-          - breakfast-lunch
-          - dinner
-          - lunch-dinner
-          - late-night
-          - all
-        menu_duration_time_start:
-          type: string
-          description: Start time in hh:mm (ISO 8601, 24-hour).
-        menu_duration_time_end:
-          type: string
-          description: End time in hh:mm (ISO 8601, 24-hour).
-        menu_groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuGroup'
     MenuItem:
       type: object
       description: A single menu item with prices, dietary flags, and allergens.
@@ -213,6 +214,23 @@ components:
           type: array
           items:
             type: string
+    MenuGroup:
+      type: object
+      properties:
+        group_name:
+          type: string
+        group_note:
+          type: string
+        group_description:
+          type: string
+        menu_group_options:
+          type: array
+          items:
+            type: object
+        menu_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItem'
     SearchResponse:
       type: object
       properties:
@@ -233,6 +251,41 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Menu'
+    Menu:
+      type: object
+      description: A single menu within a restaurant, per the OpenMenu Format.
+      properties:
+        menu_name:
+          type: string
+        menu_description:
+          type: string
+        menu_note:
+          type: string
+        currency_symbol:
+          type: string
+        language:
+          type: string
+        menu_duration_name:
+          type: string
+          enum:
+          - breakfast
+          - brunch
+          - lunch
+          - breakfast-lunch
+          - dinner
+          - lunch-dinner
+          - late-night
+          - all
+        menu_duration_time_start:
+          type: string
+          description: Start time in hh:mm (ISO 8601, 24-hour).
+        menu_duration_time_end:
+          type: string
+          description: End time in hh:mm (ISO 8601, 24-hour).
+        menu_groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuGroup'
     ApiEnvelope:
       type: object
       description: Standard `response.api` envelope returned with every call.
@@ -249,24 +302,13 @@ components:
         api_key:
           type: boolean
           description: Whether a valid API key accompanied the request.
-    MenuGroup:
-      type: object
-      properties:
-        group_name:
-          type: string
-        group_note:
-          type: string
-        group_description:
-          type: string
-        menu_group_options:
-          type: array
-          items:
-            type: object
-        menu_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItem'
   responses:
+    BillingInactive:
+      description: Key is valid structurally but API billing is inactive or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
     InvalidKey:
       description: Missing or invalid API key.
       content:
@@ -279,48 +321,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ApiEnvelope'
-    BillingInactive:
-      description: Key is valid structurally but API billing is inactive or expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
-  parameters:
-    State:
-      name: state
-      in: query
-      required: false
-      description: Optional two-letter state or province code to narrow results.
-      schema:
-        type: string
-    City:
-      name: city
-      in: query
-      required: false
-      description: Limit results to a city. Required if `postal_code` is not provided.
-      schema:
-        type: string
-    Key:
-      name: key
-      in: query
-      required: false
-      description: API key issued from your OpenMenu account.
-      schema:
-        type: string
-    Country:
-      name: country
-      in: query
-      required: true
-      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
-      schema:
-        type: string
-    PostalCode:
-      name: postal_code
-      in: query
-      required: false
-      description: Limit results to a postal or ZIP code. Required if `city` is not provided.
-      schema:
-        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
