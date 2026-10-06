@@ -48,7 +48,7 @@ tags:
   - Structured Data
 url: https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/apis.yml
 created: '2026-06-02'
-modified: '2026-06-03'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: openmenu:enhanced-api
@@ -279,6 +279,8 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rules/openmenu-rules.yml
 common:
+  - url: https://www.openmenu.com/insights
+    type: Blog
   - type: AgenticAccess
     url: agentic-access/openmenu-agentic-access.yml
   - type: DomainSecurity
