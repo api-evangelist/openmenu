@@ -59,3 +59,34 @@ notes:
   - One successful API request consumes one credit.
   - Sandbox calls using s=sample or id=sample are excluded from metering.
   - Legacy billing keys use a monthly-only credit allocation.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: Free
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Starter
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Growth
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Custom / Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
