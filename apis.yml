@@ -279,6 +279,10 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/openmenu/refs/heads/main/rules/openmenu-rules.yml
 common:
+  - type: Plans
+    url: plans/openmenu-plans-pricing.yml
+  - type: FinOps
+    url: finops/openmenu-finops.yml
   - url: https://www.openmenu.com/insights
     type: Blog
   - type: AgenticAccess
