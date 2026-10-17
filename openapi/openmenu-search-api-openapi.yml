@@ -76,19 +76,31 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    InvalidKey:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    BillingInactive:
+      description: Key is valid structurally but API billing is inactive or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
+    RateLimited:
+      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiEnvelope'
   parameters:
-    Country:
-      name: country
-      in: query
-      required: true
-      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
-      schema:
-        type: string
-    PostalCode:
-      name: postal_code
+    City:
+      name: city
       in: query
       required: false
-      description: Limit results to a postal or ZIP code. Required if `city` is not provided.
+      description: Limit results to a city. Required if `postal_code` is not provided.
       schema:
         type: string
     Key:
@@ -105,32 +117,20 @@ components:
       description: Optional two-letter state or province code to narrow results.
       schema:
         type: string
-    City:
-      name: city
+    Country:
+      name: country
       in: query
-      required: false
-      description: Limit results to a city. Required if `postal_code` is not provided.
+      required: true
+      description: Country for the search area, ISO 3166-1 alpha-2 (e.g. US).
       schema:
         type: string
-  responses:
-    RateLimited:
-      description: Daily or monthly call credit limit exceeded. Response includes an `upgrade_url`.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
-    InvalidKey:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
-    BillingInactive:
-      description: Key is valid structurally but API billing is inactive or expired.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiEnvelope'
+    PostalCode:
+      name: postal_code
+      in: query
+      required: false
+      description: Limit results to a postal or ZIP code. Required if `city` is not provided.
+      schema:
+        type: string
   schemas:
     MenuItem:
       type: object
@@ -187,6 +187,57 @@ components:
           type: array
           items:
             type: string
+    Menu:
+      type: object
+      description: A single menu within a restaurant, per the OpenMenu Format.
+      properties:
+        menu_name:
+          type: string
+        menu_description:
+          type: string
+        menu_note:
+          type: string
+        currency_symbol:
+          type: string
+        language:
+          type: string
+        menu_duration_name:
+          type: string
+          enum:
+          - breakfast
+          - brunch
+          - lunch
+          - breakfast-lunch
+          - dinner
+          - lunch-dinner
+          - late-night
+          - all
+        menu_duration_time_start:
+          type: string
+          description: Start time in hh:mm (ISO 8601, 24-hour).
+        menu_duration_time_end:
+          type: string
+          description: End time in hh:mm (ISO 8601, 24-hour).
+        menu_groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuGroup'
+    ApiEnvelope:
+      type: object
+      description: Standard `response.api` envelope returned with every call.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code (e.g. 200).
+        api_version:
+          type: string
+          description: API version, e.g. "2.2".
+        format:
+          type: string
+          description: Response format, e.g. "json".
+        api_key:
+          type: boolean
+          description: Whether a valid API key accompanied the request.
     RestaurantSummary:
       type: object
       description: Compact restaurant record returned in search and location results.
@@ -253,57 +304,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Menu'
-    ApiEnvelope:
-      type: object
-      description: Standard `response.api` envelope returned with every call.
-      properties:
-        status:
-          type: integer
-          description: HTTP-style status code (e.g. 200).
-        api_version:
-          type: string
-          description: API version, e.g. "2.2".
-        format:
-          type: string
-          description: Response format, e.g. "json".
-        api_key:
-          type: boolean
-          description: Whether a valid API key accompanied the request.
-    Menu:
-      type: object
-      description: A single menu within a restaurant, per the OpenMenu Format.
-      properties:
-        menu_name:
-          type: string
-        menu_description:
-          type: string
-        menu_note:
-          type: string
-        currency_symbol:
-          type: string
-        language:
-          type: string
-        menu_duration_name:
-          type: string
-          enum:
-          - breakfast
-          - brunch
-          - lunch
-          - breakfast-lunch
-          - dinner
-          - lunch-dinner
-          - late-night
-          - all
-        menu_duration_time_start:
-          type: string
-          description: Start time in hh:mm (ISO 8601, 24-hour).
-        menu_duration_time_end:
-          type: string
-          description: End time in hh:mm (ISO 8601, 24-hour).
-        menu_groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuGroup'
     MenuGroup:
       type: object
       properties:
